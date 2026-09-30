@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GitFlow Automations">
+  <rect width="64" height="64" rx="14" fill="#0C1016"/>
+  <path d="M22 14 V50" stroke="#3DF2A6" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M22 20 C22 30 42 24 42 32 C42 40 22 34 22 44" stroke="#8B7CFF" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <circle cx="22" cy="14" r="5.5" fill="#0C1016" stroke="#3DF2A6" stroke-width="4"/>
+  <circle cx="42" cy="32" r="5.5" fill="#8B7CFF"/>
+  <circle cx="22" cy="50" r="6.5" fill="#3DF2A6"/>
+</svg>

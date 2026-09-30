@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitFlow Automations — Automações e agentes de IA com engenharia de verdade</title>
+  <meta name="description" content="A GitFlow Automations projeta, versiona e monitora automações e agentes de IA para empresas, com o rigor de uma equipe de engenharia de software.">
+  <meta name="theme-color" content="#07090D">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GitFlow Automations">
+  <meta property="og:description" content="Automações e agentes de IA que não quebram na segunda-feira.">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="nav" data-nav>
+    <div class="wrap nav__inner">
+      <a class="brand" href="#topo" aria-label="GitFlow Automations — início">
+        <img src="assets/img/logo-mark.svg" alt="" width="32" height="32">
+        <span class="brand__name">gitflow<span class="brand__sub">automations</span></span>
+      </a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#fluxo">Como trabalhamos</a>
+        <a href="#casos">Casos de uso</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+      <a class="btn btn--primary btn--sm" href="#contato">Agendar diagnóstico</a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- HERO -->
+    <section class="hero" id="topo">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="dot"></span> Automação · Agentes de IA · Software sob medida</p>
+          <h1>Automações e agentes de IA que <em>não quebram</em> na segunda-feira.</h1>
+          <p class="lead">A GitFlow Automations projeta, versiona e monitora as automações da sua empresa com o rigor de uma equipe de engenharia de software. Menos tarefa manual, mais operação previsível.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#contato">Agendar diagnóstico gratuito</a>
+            <a class="btn btn--ghost" href="#fluxo">Ver como trabalhamos <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <figure class="graph" aria-label="Exemplo de fluxo automatizado de atendimento comercial">
+          <figcaption class="graph__bar">
+            <span class="mono">exemplo</span>
+            <span class="mono graph__file">fluxo/atendimento-comercial</span>
+          </figcaption>
+          <svg viewBox="0 0 460 420" class="graph__svg" role="img" aria-hidden="true">
+            <!-- linha principal -->
+            <path class="ln ln--main" d="M50 30 V390"/>
+            <!-- branch do agente de IA -->
+            <path id="p-ia" class="ln ln--violet" d="M50 60 C50 110 170 80 170 130 V210 C170 260 50 230 50 270"/>
+            <!-- branch de follow-up -->
+            <path id="p-fu" class="ln ln--amber" d="M50 290 C50 320 170 300 170 330 C170 360 50 350 50 380"/>
+            <path class="flow flow--violet" d="M50 60 C50 110 170 80 170 130 V210 C170 260 50 230 50 270"/>
+            <path class="flow flow--amber" d="M50 290 C50 320 170 300 170 330 C170 360 50 350 50 380"/>
+
+            <circle class="pulse" r="5"><animateMotion dur="4.5s" repeatCount="indefinite" rotate="auto"><mpath href="#p-ia"/></animateMotion></circle>
+            <circle class="pulse pulse--amber" r="5"><animateMotion dur="3.5s" begin="1s" repeatCount="indefinite"><mpath href="#p-fu"/></animateMotion></circle>
+
+            <g class="node"><circle cx="50" cy="30" r="9" class="n n--main-o"/><text x="76" y="26">Lead chega pelo WhatsApp</text><text x="76" y="44" class="sub">gatilho · 24h por dia</text></g>
+            <g class="node"><circle cx="170" cy="140" r="8" class="n n--violet"/><text x="194" y="136">Agente de IA entende o pedido</text><text x="194" y="154" class="sub">qualifica e responde</text></g>
+            <g class="node"><circle cx="170" cy="200" r="8" class="n n--violet"/><text x="194" y="196">Consulta CRM e agenda</text><text x="194" y="214" class="sub">dados da sua empresa</text></g>
+            <g class="node"><circle cx="50" cy="270" r="9" class="n n--main"/><text x="76" y="266">Proposta enviada</text><text x="76" y="284" class="sub">merge → operação</text></g>
+            <g class="node"><circle cx="170" cy="330" r="8" class="n n--amber"/><text x="194" y="326">Follow-up automático</text><text x="194" y="344" class="sub">sem ninguém esquecer</text></g>
+            <g class="node"><circle cx="50" cy="390" r="10" class="n n--main"/><text x="76" y="386">Humano entra quando importa</text><text x="76" y="404" class="sub">handoff com contexto</text></g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- LOG -->
+    <section class="log" aria-label="Exemplos de automações que construímos">
+      <div class="wrap">
+        <div class="log__track" data-marquee>
+          <ul class="log__list mono">
+            <li><b class="c-mint">feat(vendas)</b> agente de IA qualifica leads no WhatsApp</li>
+            <li><b class="c-violet">feat(financeiro)</b> conciliação automática de pagamentos</li>
+            <li><b class="c-amber">feat(atendimento)</b> triagem de tickets por intenção</li>
+            <li><b class="c-mint">feat(operações)</b> relatórios diários sem planilha manual</li>
+            <li><b class="c-violet">fix(atendimento)</b> handoff para humano quando o cliente pede</li>
+            <li><b class="c-amber">feat(marketing)</b> conteúdo e agenda de posts com revisão</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="section" id="servicos">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">Serviços</p>
+          <h2>Três formas de tirar trabalho repetitivo do seu time.</h2>
+        </header>
+        <div class="cards">
+          <article class="card">
+            <span class="card__tag mono c-mint">01 · automação</span>
+            <h3>Automação de processos</h3>
+            <p>Conectamos os sistemas que você já usa — WhatsApp, CRM, ERP, planilhas, e-mail — para que as tarefas rodem sozinhas e sem retrabalho.</p>
+            <ul class="ticks"><li>Mapeamento do processo atual</li><li>Integrações e APIs</li><li>Alertas quando algo sai do normal</li></ul>
+          </article>
+          <article class="card card--feature">
+            <span class="card__tag mono c-violet">02 · agentes de IA</span>
+            <h3>Agentes de IA</h3>
+            <p>Assistentes que entendem linguagem natural, consultam seus dados e executam ações: atendem, qualificam, respondem e passam para um humano com contexto.</p>
+            <ul class="ticks"><li>Treinados nas regras do seu negócio</li><li>Limites e aprovações definidos por você</li><li>Registro de cada decisão</li></ul>
+          </article>
+          <article class="card">
+            <span class="card__tag mono c-amber">03 · software</span>
+            <h3>Software sob medida</h3>
+            <p>Quando nenhuma ferramenta pronta resolve: painéis, sistemas internos e integrações desenvolvidos com código versionado e documentado.</p>
+            <ul class="ticks"><li>Código seu, no seu repositório</li><li>Testes e deploy automatizado</li><li>Documentação para o seu time</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLUXO -->
+    <section class="section section--alt" id="fluxo">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">O fluxo GitFlow</p>
+          <h2>Tratamos cada automação como <em>software</em>. Por isso ela dura.</h2>
+          <p class="section__lead">Automação feita às pressas funciona até alguém mudar um campo no CRM. Nosso processo vem da engenharia de software: nada vai para a sua operação sem ser testado e aprovado.</p>
+        </header>
+        <ol class="steps">
+          <li class="step"><span class="step__cmd mono">01 · diagnóstico</span><h3>Mapeamos o processo</h3><p>Entendemos onde o seu time perde horas e o que dá mais retorno automatizar primeiro.</p></li>
+          <li class="step"><span class="step__cmd mono">02 · branch</span><h3>Construímos isolado</h3><p>A automação nasce num ambiente separado, sem risco para a operação que já funciona.</p></li>
+          <li class="step"><span class="step__cmd mono">03 · pull request</span><h3>Você revisa e aprova</h3><p>Demonstração com dados reais. Ajustamos até ficar do jeito certo — a decisão é sua.</p></li>
+          <li class="step"><span class="step__cmd mono">04 · merge</span><h3>Vai para produção</h3><p>Implantação controlada, com versão anterior guardada caso seja preciso voltar.</p></li>
+          <li class="step"><span class="step__cmd mono">05 · monitor</span><h3>Acompanhamos de perto</h3><p>Alertas, métricas e melhorias contínuas. Se algo falhar, a gente sabe antes do seu cliente.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CASOS DE USO -->
+    <section class="section" id="casos">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">Casos de uso</p>
+          <h2>Onde a automação costuma pagar a conta mais rápido.</h2>
+        </header>
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="Áreas da empresa">
+            <button role="tab" aria-selected="true" aria-controls="t-vendas" id="b-vendas">Vendas</button>
+            <button role="tab" aria-selected="false" aria-controls="t-atend" id="b-atend" tabindex="-1">Atendimento</button>
+            <button role="tab" aria-selected="false" aria-controls="t-fin" id="b-fin" tabindex="-1">Financeiro</button>
+            <button role="tab" aria-selected="false" aria-controls="t-ops" id="b-ops" tabindex="-1">Operações</button>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="t-vendas" aria-labelledby="b-vendas">
+            <ul class="usecases"><li>Resposta imediata a leads no WhatsApp e Instagram, 24h</li><li>Qualificação por IA e envio direto para o CRM</li><li>Follow-up automático de propostas paradas</li><li>Agendamento de reuniões sem troca de mensagens</li></ul>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="t-atend" aria-labelledby="b-atend" hidden>
+            <ul class="usecases"><li>Agente de IA que responde dúvidas com base nos seus documentos</li><li>Triagem e priorização de tickets por intenção</li><li>Transferência para humano com o histórico completo</li><li>Pesquisa de satisfação após cada atendimento</li></ul>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="t-fin" aria-labelledby="b-fin" hidden>
+            <ul class="usecases"><li>Conciliação de pagamentos e extratos</li><li>Cobrança e lembretes de vencimento automáticos</li><li>Leitura de notas e boletos com IA</li><li>Relatórios financeiros diários prontos no seu e-mail</li></ul>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="t-ops" aria-labelledby="b-ops" hidden>
+            <ul class="usecases"><li>Integração entre ERP, planilhas e sistemas legados</li><li>Controle de estoque com alertas</li><li>Onboarding de clientes e colaboradores</li><li>Painéis com os números que importam, atualizados sozinhos</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="section section--alt">
+      <div class="wrap diff">
+        <header class="section__head">
+          <p class="eyebrow">Por que GitFlow</p>
+          <h2>Não é “mais um no-code”.</h2>
+        </header>
+        <dl class="diff__grid">
+          <div><dt>Versionado</dt><dd>Toda mudança fica registrada. Dá para ver o que mudou, quando e por quê — e voltar se precisar.</dd></div>
+          <div><dt>Seu, de verdade</dt><dd>O código e as automações ficam nas suas contas. Nada de refém de fornecedor.</dd></div>
+          <div><dt>IA com limites</dt><dd>Agentes só fazem o que você autorizar, com aprovação humana nas decisões sensíveis.</dd></div>
+          <div><dt>Monitorado</dt><dd>Alertas quando algo sai do normal. Automação silenciosa que falha é pior do que nenhuma.</dd></div>
+        </dl>
+        <p class="stack mono">Trabalhamos com: Claude · OpenAI · n8n · Make · APIs de WhatsApp · Python · TypeScript · bancos de dados · qualquer sistema com API</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap faq">
+        <header class="section__head">
+          <p class="eyebrow">Dúvidas</p>
+          <h2>Perguntas frequentes</h2>
+        </header>
+        <details><summary>Preciso trocar os sistemas que já uso?</summary><p>Não. Na maioria dos casos conectamos o que você já tem. Só sugerimos trocar quando a ferramenta atual realmente impede a automação.</p></details>
+        <details><summary>A IA vai responder meus clientes sem controle?</summary><p>Não. Definimos com você o que o agente pode e não pode fazer, quando ele passa para um humano e quais ações exigem aprovação.</p></details>
+        <details><summary>Quanto tempo leva para ter a primeira automação rodando?</summary><p>Depende do processo. No diagnóstico gratuito mapeamos o escopo e você recebe um prazo e um valor fechados antes de começar.</p></details>
+        <details><summary>E se algo parar de funcionar?</summary><p>As automações são monitoradas. Quando algo sai do normal, recebemos o alerta e corrigimos — normalmente antes de você perceber.</p></details>
+        <details><summary>Meus dados ficam seguros?</summary><p>Usamos as contas e permissões mínimas necessárias, seguimos a LGPD e documentamos por onde cada dado passa.</p></details>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section cta" id="contato">
+      <div class="wrap cta__grid">
+        <div>
+          <p class="eyebrow">Diagnóstico gratuito</p>
+          <h2>Conte o processo que mais toma tempo do seu time.</h2>
+          <p class="section__lead">Em 30 minutos mapeamos o que dá para automatizar, o retorno esperado e por onde começar. Sem compromisso.</p>
+        </div>
+        <form class="form" data-contato novalidate>
+          <label>Seu nome<input name="nome" autocomplete="name" required></label>
+          <label>Empresa<input name="empresa" autocomplete="organization"></label>
+          <label>O que você quer automatizar?<textarea name="processo" rows="4" required placeholder="Ex.: responder orçamentos que chegam pelo WhatsApp"></textarea></label>
+          <button class="btn btn--primary" type="submit">Enviar pelo WhatsApp</button>
+          <p class="form__note">Você será levado ao WhatsApp com a mensagem pronta.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a class="brand" href="#topo"><img src="assets/img/logo-mark.svg" alt="" width="28" height="28"><span class="brand__name">gitflow<span class="brand__sub">automations</span></span></a>
+      <nav class="footer__links" aria-label="Redes">
+        <a href="https://www.instagram.com/gitflow.ia/" data-instagram rel="noopener">Instagram @gitflow.ia</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <p class="footer__copy mono">© <span data-ano>2026</span> GitFlow Automations</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
