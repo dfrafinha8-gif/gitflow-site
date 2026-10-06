@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checklist: 10 tarefas para automatizar essa semana — GitFlow Automations</title>
+  <meta name="description" content="Marque o que acontece na sua empresa e descubra o que dá para automatizar já. Checklist gratuito da GitFlow Automations, de Três Pontas (MG).">
+  <meta name="theme-color" content="#07090D">
+  <link rel="icon" href="../assets/img/simbolo-app.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .lista-check { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .tarefa { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); cursor: pointer; transition: border-color .15s, background .15s; }
+    .tarefa:hover { border-color: #2C3746; }
+    .tarefa input { appearance: none; width: 26px; height: 26px; margin: 2px 0 0; border: 2px solid var(--muted); border-radius: 8px; display: grid; place-content: center; cursor: pointer; }
+    .tarefa input::after { content: "✓"; font: 600 16px var(--mono); color: #0C1016; transform: scale(0); transition: transform .12s; }
+    .tarefa input:checked { background: var(--mint); border-color: var(--mint); }
+    .tarefa input:checked::after { transform: scale(1); }
+    .tarefa:has(input:checked) { border-color: var(--mint); background: color-mix(in srgb, var(--mint) 8%, var(--surface)); }
+    .tarefa strong { display: block; font-size: 18px; font-weight: 600; }
+    .tarefa span { display: block; margin-top: 4px; color: var(--muted); font-size: 15px; }
+    .placar { position: sticky; bottom: 12px; margin-top: 24px; padding: 10px 10px 10px 18px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line); box-shadow: 0 16px 32px -16px rgba(0,0,0,.8); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .placar .btn { padding: 12px 18px; font-size: 15px; }
+    .resultado { margin-top: 20px; font-size: 17px; color: var(--text); }
+    .placar p { margin: 0; }
+    .placar__num { font: 600 15px var(--mono); color: var(--mint); text-transform: uppercase; letter-spacing: .06em; }
+        .nota { margin-top: 40px; color: var(--muted); font-size: 14px; }
+    .topo-simples { padding: 28px 0 0; }
+    .topo-simples img { height: 30px; width: auto; }
+    .checklist { padding: 48px 0 80px; }
+    .checklist h1 { font-size: clamp(34px, 5vw, 52px); }
+  </style>
+</head>
+<body>
+  <header class="wrap topo-simples">
+    <a href="../"><img src="../assets/img/logo-horizontal-escuro.svg" alt="GitFlow Automations"></a>
+  </header>
+
+  <main class="wrap checklist" style="max-width: 760px;">
+    <p class="eyebrow"><span class="dot"></span> Checklist gratuito</p>
+    <h1>10 tarefas que dá para <em>automatizar</em> essa semana</h1>
+    <p class="lead">Marque o que acontece na sua empresa hoje. No fim, você vê quanto dá para tirar do colo do seu time.</p>
+
+    <ol class="lista-check" style="margin-top: 36px;" data-lista>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Responder sempre as mesmas perguntas</strong><span>“Qual o preço?”, “Que horas abre?”, “Tem disponível?” no WhatsApp ou no direct.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Confirmar agendamentos e lembrar na véspera</strong><span>Alguém do time manda mensagem um por um para confirmar horário.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Cobrar boleto ou Pix que está vencendo</strong><span>Lembrete antes, no dia e depois do vencimento, feito na mão (ou esquecido).</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Montar o mesmo orçamento de novo</strong><span>As informações chegam por mensagem e alguém copia para um modelo.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Passar contatos para planilha ou CRM</strong><span>Lead que chega pelo Instagram ou WhatsApp é anotado à mão — quando é.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Cobrar resposta de proposta parada</strong><span>Proposta enviada, cliente sumiu, e ninguém lembra de chamar de novo.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Mandar recibo ou comprovante depois do pagamento</strong><span>Alguém confere o pagamento e envia o documento manualmente.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Fechar o relatório da semana</strong><span>Somar vendas, atendimentos ou entregas em planilha toda segunda-feira.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Pedir avaliação ou pesquisa de satisfação</strong><span>Depois do atendimento, ninguém pede — ou pede quando lembra.</span></div></label></li>
+      <li><label class="tarefa"><input type="checkbox"><div><strong>Dar boas-vindas e pedir documentos a cliente novo</strong><span>Mesma mensagem, mesmos anexos, sempre digitados de novo.</span></div></label></li>
+    </ol>
+
+    <div class="placar" aria-live="polite">
+      <p class="placar__num" data-num>0 de 10</p>
+      <a class="btn btn--primary" data-zap href="#" target="_blank" rel="noopener">Quero o diagnóstico grátis</a>
+    </div>
+    <p class="resultado" data-txt>Marque as tarefas que acontecem na sua empresa.</p>
+
+    <p class="nota">Feito pela GitFlow Automations — Rafa e Lucas, Três Pontas (MG). A gente tira o trabalho repetitivo das empresas com automação e agentes de IA, com aprovação sua em cada etapa. Suas respostas ficam só no seu celular.</p>
+  </main>
+
+  <script>
+    (() => {
+      const ZAP = '5535998943008';
+      const caixas = [...document.querySelectorAll('[data-lista] input')];
+      const num = document.querySelector('[data-num]'), txt = document.querySelector('[data-txt]'), zap = document.querySelector('[data-zap]');
+      const CHAVE = 'gitflow-checklist';
+      try { const salvo = JSON.parse(localStorage.getItem(CHAVE) || '[]'); caixas.forEach((c, i) => c.checked = !!salvo[i]); } catch (e) {}
+      function atualizar() {
+        const marcadas = caixas.filter(c => c.checked);
+        const n = marcadas.length;
+        try { localStorage.setItem(CHAVE, JSON.stringify(caixas.map(c => c.checked))); } catch (e) {}
+        num.textContent = `${n} de 10`;
+        txt.textContent = n === 0 ? 'Marque as tarefas que acontecem na sua empresa.'
+          : n < 3 ? 'Já dá para começar por uma delas e ganhar horas por semana.'
+          : 'Sua empresa tem bastante coisa rodando na mão. Dá para automatizar boa parte disso.';
+        const lista = marcadas.map(c => '• ' + c.closest('.tarefa').querySelector('strong').textContent).join('\n');
+        const msg = `Oi! Vim pelo Instagram (checklist AUTOMAÇÃO). Marquei ${n} de 10:\n${lista}\nQuero o diagnóstico grátis.`;
+        zap.href = `https://wa.me/${ZAP}?text=${encodeURIComponent(msg)}`;
+        zap.textContent = n ? `Automatizar essas ${n}` : 'Diagnóstico grátis';
+      }
+      caixas.forEach(c => c.addEventListener('change', atualizar));
+      atualizar();
+    })();
+  </script>
+</body>
+</html>
