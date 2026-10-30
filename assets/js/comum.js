@@ -35,7 +35,8 @@ document.addEventListener('tema', marcarNav);
 
 // O botão fixo do celular some quando o formulário já está na tela
 const fixo = document.querySelector('[data-fixo]');
-new IntersectionObserver(([v]) => { fixo.dataset.fora = v.isIntersecting; }).observe(document.querySelector('#contato'));
+const contato = document.querySelector('#contato');
+if (contato) new IntersectionObserver(([v]) => { fixo.dataset.fora = v.isIntersecting; }).observe(contato);
 
 // Cliques que levam ao contato, e de onde eles vêm
 document.querySelectorAll('a[href="#contato"]').forEach((a) => {
@@ -59,7 +60,7 @@ document.querySelectorAll('[data-interesse]').forEach((a) => {
 
 // Formulário → mensagem pronta no WhatsApp. A calculadora da página principal preenche a conta.
 let conta = '';
-form.addEventListener('submit', (e) => {
+form?.addEventListener('submit', (e) => {
   e.preventDefault();
   const campos = [...form.querySelectorAll('[required]')];
   campos.forEach((c) => c.setAttribute('aria-invalid', !c.value.trim()));
@@ -72,4 +73,5 @@ form.addEventListener('submit', (e) => {
 });
 
 document.querySelectorAll('[data-instagram]').forEach((a) => { a.href = CONFIG.instagram; });
+document.querySelectorAll('[data-whatsapp]').forEach((a) => { a.href = `https://wa.me/${CONFIG.whatsapp}`; });
 document.querySelectorAll('[data-ano]').forEach((el) => { el.textContent = new Date().getFullYear(); });
