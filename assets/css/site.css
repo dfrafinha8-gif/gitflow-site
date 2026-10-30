@@ -225,6 +225,9 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
 
 .rodape { background: var(--fundo); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 30px; padding: 30px var(--borda); font-size: .9rem; color: var(--prata); }
 
+.rodape small { flex-basis: 100%; color: var(--apagado); font-size: .8rem; }
+.rodape small[hidden] { display: none; }
+
 .fixo { display: none; }
 
 /* Entrada dos blocos ao rolar */
