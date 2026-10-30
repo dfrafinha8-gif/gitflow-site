@@ -3,237 +3,382 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GitFlow Automations — Automações e agentes de IA com engenharia de verdade</title>
-  <meta name="description" content="A GitFlow Automations projeta, versiona e monitora automações e agentes de IA para empresas, com o rigor de uma equipe de engenharia de software.">
+  <title>GitFlow Automations — Agentes de IA, automações, cobrança, painéis, software e sites</title>
+  <meta name="description" content="Agentes de IA, automações, cobrança automática, painéis de gestão, software e sites sob medida para sua empresa atender na hora, receber em dia e decidir com número real. Dois sócios em Três Pontas, MG. Diagnóstico gratuito de 20 minutos.">
   <meta name="theme-color" content="#07090D">
   <meta name="geo.placename" content="Três Pontas, MG">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="GitFlow Automations">
-  <meta property="og:description" content="Automações e agentes de IA que não quebram na segunda-feira.">
+  <meta property="og:title" content="Seu cliente chamou às 22h. Quem respondeu?">
+  <meta property="og:description" content="Agentes de IA, automações, cobrança automática, painéis de gestão, software e sites sob medida, de quem atende a quem constrói. Diagnóstico gratuito de 20 minutos.">
   <meta property="og:locale" content="pt_BR">
   <link rel="icon" href="assets/img/simbolo-app.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500&family=Saira:wdth,wght@125,500;125,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="nav" data-nav>
-    <div class="wrap nav__inner">
-      <a class="brand" href="#topo" aria-label="GitFlow Automations — início">
-        <img src="assets/img/logo-horizontal-escuro.svg" alt="GitFlow Automations">
-      </a>
-      <nav class="nav__links" aria-label="Principal">
-        <a href="#servicos">Serviços</a>
-        <a href="#fluxo">Como trabalhamos</a>
-        <a href="#casos">Casos de uso</a>
-        <a href="#faq">Dúvidas</a>
-      </nav>
-      <a class="btn btn--primary btn--sm" href="#contato">Agendar diagnóstico</a>
-    </div>
+    <a class="nav__marca" href="#topo">GitFlow Automations</a>
+    <nav aria-label="Principal">
+      <a href="#o-que-fazemos">O que fazemos</a>
+      <a href="#custo">Quanto custa esperar</a>
+      <a href="#ao-vivo">Testar o agente</a>
+      <a href="#projetos">Projetos</a>
+      <a class="nav__chamar" href="#contato">Diagnóstico gratuito</a>
+    </nav>
   </header>
 
   <main id="conteudo">
-    <!-- HERO -->
-    <section class="hero" id="topo">
-      <div class="wrap hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow"><span class="dot"></span> Automação · Agentes de IA · Software sob medida</p>
-          <h1>Automações e agentes de IA que <em>não quebram</em> na segunda-feira.</h1>
-          <p class="lead">A GitFlow Automations projeta, versiona e monitora as automações da sua empresa com o rigor de uma equipe de engenharia de software. Menos tarefa manual, mais operação previsível.</p>
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#contato">Agendar diagnóstico gratuito</a>
-            <a class="btn btn--ghost" href="#fluxo">Ver como trabalhamos <span aria-hidden="true">→</span></a>
+    <section class="trilho" id="topo" data-tema="escuro" data-trilho>
+      <div class="palco" data-palco>
+        <div class="palco__sol" data-sol aria-hidden="true"></div>
+        <div class="palco__ouro" data-ouro aria-hidden="true"></div>
+        <canvas data-tela aria-hidden="true"></canvas>
+        <img class="palco__logo" src="assets/img/simbolo.svg" alt="" hidden data-logo>
+
+        <div class="abre" data-abre>
+          <h1>Seu cliente chamou às 22h. <b>Quem respondeu?</b></h1>
+          <p>Agentes de IA, automações, cobrança automática, painéis de gestão, software e sites sob medida. Para atender na hora, receber em dia e decidir com número real.</p>
+          <div class="abre__botoes">
+            <a class="botao" href="#contato">Quero meu diagnóstico gratuito</a>
+            <a class="botao botao--linha" href="#ao-vivo">Testar o agente agora</a>
           </div>
+          <small>20 minutos, sem compromisso. Três Pontas, Sul de Minas e online.</small>
         </div>
 
-        <figure class="graph" aria-label="Exemplo de fluxo automatizado de atendimento comercial">
-          <figcaption class="graph__bar">
-            <span class="mono">exemplo</span>
-            <span class="mono graph__file">fluxo/atendimento-comercial</span>
-          </figcaption>
-          <svg viewBox="0 0 460 420" class="graph__svg" role="img" aria-hidden="true">
-            <!-- linha principal -->
-            <path class="ln ln--main" d="M50 30 V390"/>
-            <!-- branch do agente de IA -->
-            <path id="p-ia" class="ln ln--violet" d="M50 60 C50 110 170 80 170 130 V210 C170 260 50 230 50 270"/>
-            <!-- branch de follow-up -->
-            <path id="p-fu" class="ln ln--amber" d="M50 290 C50 320 170 300 170 330 C170 360 50 350 50 380"/>
-            <path class="flow flow--violet" d="M50 60 C50 110 170 80 170 130 V210 C170 260 50 230 50 270"/>
-            <path class="flow flow--amber" d="M50 290 C50 320 170 300 170 330 C170 360 50 350 50 380"/>
-
-            <circle class="pulse" r="5"><animateMotion dur="4.5s" repeatCount="indefinite" rotate="auto"><mpath href="#p-ia"/></animateMotion></circle>
-            <circle class="pulse pulse--amber" r="5"><animateMotion dur="3.5s" begin="1s" repeatCount="indefinite"><mpath href="#p-fu"/></animateMotion></circle>
-
-            <g class="node"><circle cx="50" cy="30" r="9" class="n n--main-o"/><text x="76" y="26">Lead chega pelo WhatsApp</text><text x="76" y="44" class="sub">gatilho · 24h por dia</text></g>
-            <g class="node"><circle cx="170" cy="140" r="8" class="n n--violet"/><text x="194" y="136">Agente de IA entende o pedido</text><text x="194" y="154" class="sub">qualifica e responde</text></g>
-            <g class="node"><circle cx="170" cy="200" r="8" class="n n--violet"/><text x="194" y="196">Consulta CRM e agenda</text><text x="194" y="214" class="sub">dados da sua empresa</text></g>
-            <g class="node"><circle cx="50" cy="270" r="9" class="n n--main"/><text x="76" y="266">Proposta enviada</text><text x="76" y="284" class="sub">merge → operação</text></g>
-            <g class="node"><circle cx="170" cy="330" r="8" class="n n--amber"/><text x="194" y="326">Follow-up automático</text><text x="194" y="344" class="sub">sem ninguém esquecer</text></g>
-            <g class="node"><circle cx="50" cy="390" r="10" class="n n--main"/><text x="76" y="386">Humano entra quando importa</text><text x="76" y="404" class="sub">handoff com contexto</text></g>
-          </svg>
-        </figure>
-      </div>
-    </section>
-
-    <!-- LOG -->
-    <section class="log" aria-label="Exemplos de automações que construímos">
-      <div class="wrap">
-        <div class="log__track" data-marquee>
-          <ul class="log__list mono">
-            <li><b class="c-mint">feat(vendas)</b> agente de IA qualifica leads no WhatsApp</li>
-            <li><b class="c-violet">feat(financeiro)</b> conciliação automática de pagamentos</li>
-            <li><b class="c-amber">feat(atendimento)</b> triagem de tickets por intenção</li>
-            <li><b class="c-mint">feat(operações)</b> relatórios diários sem planilha manual</li>
-            <li><b class="c-violet">fix(atendimento)</b> handoff para humano quando o cliente pede</li>
-            <li><b class="c-amber">feat(marketing)</b> conteúdo e agenda de posts com revisão</li>
-          </ul>
+        <div class="aviso" data-aviso aria-hidden="true">
+          <small>WhatsApp · agora</small>
+          <strong>Oi! Ainda dá pra marcar para amanhã?</strong>
+          <span>Esperando resposta há <b data-espera>0:00</b></span>
         </div>
-      </div>
-    </section>
 
-    <!-- SERVIÇOS -->
-    <section class="section" id="servicos">
-      <div class="wrap">
-        <header class="section__head">
-          <p class="eyebrow">Serviços</p>
-          <h2>Três formas de tirar trabalho repetitivo do seu time.</h2>
-        </header>
-        <div class="cards">
-          <article class="card">
-            <span class="card__tag mono c-mint">01 · automação</span>
-            <h3>Automação de processos</h3>
-            <p>Conectamos os sistemas que você já usa — WhatsApp, CRM, ERP, planilhas, e-mail — para que as tarefas rodem sozinhas e sem retrabalho.</p>
-            <ul class="ticks"><li>Mapeamento do processo atual</li><li>Integrações e APIs</li><li>Alertas quando algo sai do normal</li></ul>
-          </article>
-          <article class="card card--feature">
-            <span class="card__tag mono c-violet">02 · agentes de IA</span>
-            <h3>Agentes de IA</h3>
-            <p>Assistentes que entendem linguagem natural, consultam seus dados e executam ações: atendem, qualificam, respondem e passam para um humano com contexto.</p>
-            <ul class="ticks"><li>Treinados nas regras do seu negócio</li><li>Limites e aprovações definidos por você</li><li>Registro de cada decisão</li></ul>
-          </article>
-          <article class="card">
-            <span class="card__tag mono c-amber">03 · software</span>
-            <h3>Software sob medida</h3>
-            <p>Quando nenhuma ferramenta pronta resolve: painéis, sistemas internos e integrações desenvolvidos com código versionado e documentado.</p>
-            <ul class="ticks"><li>Código seu, no seu repositório</li><li>Testes e deploy automatizado</li><li>Documentação para o seu time</li></ul>
-          </article>
+        <div class="relogio" data-relogio aria-hidden="true">22:07</div>
+
+        <article class="hora" data-hora>
+          <div class="hora__texto"><h2><span class="so-leitor">22:07. </span>Você estava dormindo.<br>O agente, não.</h2><p>Respondeu, tirou a dúvida e deixou o horário marcado na agenda.</p></div>
+          <div class="cartao">
+            <small class="cartao__titulo">Agente de IA · WhatsApp da empresa</small>
+            <p class="bolha">Oi! Ainda dá pra marcar para amanhã?</p>
+            <p class="bolha bolha--agente">Oi! Dá sim. Tenho às 9h ou às 14h. Qual fica melhor?</p>
+            <p class="bolha">9h</p>
+            <p class="bolha bolha--agente">Marcado para amanhã às 9h. Te lembro uma hora antes. 👍</p>
+            <small class="cartao__nota">Conversa de exemplo</small>
+          </div>
+        </article>
+
+        <article class="hora" data-hora>
+          <div class="hora__texto"><h2><span class="so-leitor">07:30. </span>Quem está para vencer já foi avisado.</h2><p>Lembrete educado, no dia certo, e o pagamento confirmado sem ninguém ficar cobrando na mão.</p></div>
+          <div class="cartao">
+            <small class="cartao__titulo">Cobrança automática · Hoje</small>
+            <ul class="lista">
+              <li><span>Lembrete enviado</span><b>vence amanhã</b></li>
+              <li><span>Lembrete enviado</span><b>vence hoje</b></li>
+              <li class="ok"><span>Pix confirmado</span><b>baixado no caixa</b></li>
+              <li class="alerta"><span>7 dias em atraso</span><b>passou para você</b></li>
+            </ul>
+            <small class="cartao__nota">Exemplo</small>
+          </div>
+        </article>
+
+        <article class="hora" data-hora>
+          <div class="hora__texto"><h2><span class="so-leitor">09:00. </span>O resumo do dia chega sem ninguém montar planilha.</h2><p>Seu painel junta o que entrou, o que foi resolvido e as duas coisas que precisam de você. Só isso.</p></div>
+          <div class="cartao">
+            <small class="cartao__titulo">Painel de gestão · Hoje</small>
+            <div class="numeros">
+              <div><b>12</b><span>contatos atendidos</span></div>
+              <div><b>4</b><span>horários marcados</span></div>
+              <div><b>2</b><span>esperam você</span></div>
+            </div>
+            <p class="cartao__alerta">Estoque: a calça preta 42 acaba essa semana.</p>
+            <small class="cartao__nota">Números de exemplo</small>
+          </div>
+        </article>
+
+        <article class="hora" data-hora>
+          <div class="hora__texto"><h2><span class="so-leitor">12:20. </span>Quem procurou no Google já pediu orçamento.</h2><p>Seu site trabalha na hora do almoço: passa confiança, mostra o que você faz e transforma visita em contato.</p></div>
+          <div class="cartao">
+            <small class="cartao__titulo">Site sob medida · Agora há pouco</small>
+            <ul class="lista">
+              <li><span>Encontrou você</span><b>busca no Google</b></li>
+              <li><span>Viu fotos e serviços</span><b>pelo celular</b></li>
+              <li class="ok"><span>Pediu orçamento</span><b>chegou no WhatsApp</b></li>
+            </ul>
+            <small class="cartao__nota">Exemplo</small>
+          </div>
+        </article>
+
+        <article class="hora" data-hora>
+          <div class="hora__texto"><h2><span class="so-leitor">14:15. </span>Quando precisa de gente, ele chama gente.</h2><p>Reclamação, desconto, assunto delicado: o agente passa para a sua equipe, com a conversa já resumida.</p></div>
+          <div class="cartao">
+            <small class="cartao__titulo">Agente de IA · WhatsApp da empresa</small>
+            <p class="bolha">Comprei uma vez e deu problema na troca. Vocês resolvem?</p>
+            <p class="cartao__passo">O agente percebeu: cliente chateado. Isso não é com robô.</p>
+            <p class="bolha bolha--pessoa">Oi! Aqui é a Ana, da loja. Vi o que aconteceu, me conta como posso resolver?</p>
+            <small class="cartao__nota">Conversa de exemplo</small>
+          </div>
+        </article>
+
+        <article class="hora" data-hora>
+          <div class="hora__texto"><h2><span class="so-leitor">18:40. </span>Quem pediu orçamento e sumiu recebe um retorno.</h2><p>Sem você precisar lembrar. Venda que ia esfriar no WhatsApp volta para a mesa.</p></div>
+          <div class="cartao">
+            <small class="cartao__titulo">Automação · Orçamento parado há 3 dias</small>
+            <p class="bolha bolha--agente">Oi, Paula! Ficou alguma dúvida no orçamento da festa do dia 12? A data ainda está livre.</p>
+            <p class="bolha">Oi! Desculpa a demora. Pode fechar.</p>
+            <p class="cartao__passo cartao__passo--ok">Pedido avisado para a equipe e data reservada.</p>
+            <small class="cartao__nota">Conversa de exemplo</small>
+          </div>
+        </article>
+
+        <div class="fecho" data-fecho>
+          <h2>Dois sócios. Zero terceirização. <b>Quem te atende é quem constrói.</b></h2>
+          <a class="botao botao--tinta" href="#contato">Falar com o Rafa e o Lucas</a>
         </div>
+
+        <a class="palco__pular" href="#o-que-fazemos" data-pular>Pular a história</a>
       </div>
     </section>
 
-    <!-- FLUXO -->
-    <section class="section section--alt" id="fluxo">
-      <div class="wrap">
-        <header class="section__head">
-          <p class="eyebrow">O fluxo GitFlow</p>
-          <h2>Tratamos cada automação como <em>software</em>. Por isso ela dura.</h2>
-          <p class="section__lead">Automação feita às pressas funciona até alguém mudar um campo no CRM. Nosso processo vem da engenharia de software: nada vai para a sua operação sem ser testado e aprovado.</p>
-        </header>
-        <ol class="steps">
-          <li class="step"><span class="step__cmd mono">01 · diagnóstico</span><h3>Mapeamos o processo</h3><p>Entendemos onde o seu time perde horas e o que dá mais retorno automatizar primeiro.</p></li>
-          <li class="step"><span class="step__cmd mono">02 · branch</span><h3>Construímos isolado</h3><p>A automação nasce num ambiente separado, sem risco para a operação que já funciona.</p></li>
-          <li class="step"><span class="step__cmd mono">03 · pull request</span><h3>Você revisa e aprova</h3><p>Demonstração com dados reais. Ajustamos até ficar do jeito certo — a decisão é sua.</p></li>
-          <li class="step"><span class="step__cmd mono">04 · merge</span><h3>Vai para produção</h3><p>Implantação controlada, com versão anterior guardada caso seja preciso voltar.</p></li>
-          <li class="step"><span class="step__cmd mono">05 · monitor</span><h3>Acompanhamos de perto</h3><p>Alertas, métricas e melhorias contínuas. Se algo falhar, a gente sabe antes do seu cliente.</p></li>
-        </ol>
+    <section class="oferta" id="o-que-fazemos" data-tema="papel">
+      <div class="oferta__topo" data-surge>
+        <h2>O que muda na sua empresa quando a gente entra.</h2>
+        <p>Ninguém contrata tecnologia por causa da tecnologia. Você contrata para vender mais, perder menos tempo e ter controle. É isso que a gente entrega, de seis formas.</p>
       </div>
-    </section>
-
-    <!-- CASOS DE USO -->
-    <section class="section" id="casos">
-      <div class="wrap">
-        <header class="section__head">
-          <p class="eyebrow">Casos de uso</p>
-          <h2>Onde a automação costuma pagar a conta mais rápido.</h2>
-        </header>
-        <div class="tabs" data-tabs>
-          <div class="tabs__list" role="tablist" aria-label="Áreas da empresa">
-            <button role="tab" aria-selected="true" aria-controls="t-vendas" id="b-vendas">Vendas</button>
-            <button role="tab" aria-selected="false" aria-controls="t-atend" id="b-atend" tabindex="-1">Atendimento</button>
-            <button role="tab" aria-selected="false" aria-controls="t-fin" id="b-fin" tabindex="-1">Financeiro</button>
-            <button role="tab" aria-selected="false" aria-controls="t-ops" id="b-ops" tabindex="-1">Operações</button>
-          </div>
-          <div class="tabs__panel" role="tabpanel" id="t-vendas" aria-labelledby="b-vendas">
-            <ul class="usecases"><li>Resposta imediata a leads no WhatsApp e Instagram, 24h</li><li>Qualificação por IA e envio direto para o CRM</li><li>Follow-up automático de propostas paradas</li><li>Agendamento de reuniões sem troca de mensagens</li></ul>
-          </div>
-          <div class="tabs__panel" role="tabpanel" id="t-atend" aria-labelledby="b-atend" hidden>
-            <ul class="usecases"><li>Agente de IA que responde dúvidas com base nos seus documentos</li><li>Triagem e priorização de tickets por intenção</li><li>Transferência para humano com o histórico completo</li><li>Pesquisa de satisfação após cada atendimento</li></ul>
-          </div>
-          <div class="tabs__panel" role="tabpanel" id="t-fin" aria-labelledby="b-fin" hidden>
-            <ul class="usecases"><li>Conciliação de pagamentos e extratos</li><li>Cobrança e lembretes de vencimento automáticos</li><li>Leitura de notas e boletos com IA</li><li>Relatórios financeiros diários prontos no seu e-mail</li></ul>
-          </div>
-          <div class="tabs__panel" role="tabpanel" id="t-ops" aria-labelledby="b-ops" hidden>
-            <ul class="usecases"><li>Integração entre ERP, planilhas e sistemas legados</li><li>Controle de estoque com alertas</li><li>Onboarding de clientes e colaboradores</li><li>Painéis com os números que importam, atualizados sozinhos</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIFERENCIAIS -->
-    <section class="section section--alt">
-      <div class="wrap diff">
-        <header class="section__head">
-          <p class="eyebrow">Por que GitFlow</p>
-          <h2>Não é “mais um no-code”.</h2>
-        </header>
-        <dl class="diff__grid">
-          <div><dt>Versionado</dt><dd>Toda mudança fica registrada. Dá para ver o que mudou, quando e por quê — e voltar se precisar.</dd></div>
-          <div><dt>Seu, de verdade</dt><dd>O código e as automações ficam nas suas contas. Nada de refém de fornecedor.</dd></div>
-          <div><dt>IA com limites</dt><dd>Agentes só fazem o que você autorizar, com aprovação humana nas decisões sensíveis.</dd></div>
-          <div><dt>Monitorado</dt><dd>Alertas quando algo sai do normal. Automação silenciosa que falha é pior do que nenhuma.</dd></div>
-        </dl>
-        <p class="stack mono">Trabalhamos com: Claude · OpenAI · n8n · Make · APIs de WhatsApp · Python · TypeScript · bancos de dados · qualquer sistema com API</p>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section" id="faq">
-      <div class="wrap faq">
-        <header class="section__head">
-          <p class="eyebrow">Dúvidas</p>
-          <h2>Perguntas frequentes</h2>
-        </header>
-        <details><summary>Preciso trocar os sistemas que já uso?</summary><p>Não. Na maioria dos casos conectamos o que você já tem. Só sugerimos trocar quando a ferramenta atual realmente impede a automação.</p></details>
-        <details><summary>A IA vai responder meus clientes sem controle?</summary><p>Não. Definimos com você o que o agente pode e não pode fazer, quando ele passa para um humano e quais ações exigem aprovação.</p></details>
-        <details><summary>Quanto tempo leva para ter a primeira automação rodando?</summary><p>Depende do processo. No diagnóstico gratuito mapeamos o escopo e você recebe um prazo e um valor fechados antes de começar.</p></details>
-        <details><summary>E se algo parar de funcionar?</summary><p>As automações são monitoradas. Quando algo sai do normal, recebemos o alerta e corrigimos — normalmente antes de você perceber.</p></details>
-        <details><summary>Meus dados ficam seguros?</summary><p>Usamos as contas e permissões mínimas necessárias, seguimos a LGPD e documentamos por onde cada dado passa.</p></details>
-      </div>
-    </section>
-
-    <!-- CONTATO -->
-    <section class="section cta" id="contato">
-      <div class="wrap cta__grid">
+      <article class="servico" data-surge>
         <div>
-          <p class="eyebrow">Diagnóstico gratuito</p>
-          <h2>Conte o processo que mais toma tempo do seu time.</h2>
-          <p class="section__lead">Em 30 minutos mapeamos o que dá para automatizar, o retorno esperado e por onde começar. Sem compromisso.</p>
+          <h3>Agentes de IA</h3>
+          <p class="servico__promessa">Todo cliente atendido na hora, sem aumentar a equipe.</p>
         </div>
-        <form class="form" data-contato novalidate>
-          <label>Seu nome<input name="nome" autocomplete="name" required></label>
-          <label>Empresa<input name="empresa" autocomplete="organization"></label>
-          <label>O que você quer automatizar?<textarea name="processo" rows="4" required placeholder="Ex.: responder orçamentos que chegam pelo WhatsApp"></textarea></label>
-          <button class="btn btn--primary" type="submit">Enviar pelo WhatsApp</button>
-          <p class="form__note">Você será levado ao WhatsApp com a mensagem pronta.</p>
-        </form>
+        <div>
+          <ul class="marcas">
+            <li>Nenhum contato fica sem resposta, nem à noite nem no fim de semana</li>
+            <li>Menos venda perdida para quem respondeu primeiro</li>
+            <li>Sua equipe só entra quando precisa de gente, já com o contexto da conversa</li>
+          </ul>
+          <p class="servico__pratica"><b>Na prática:</b> agente no WhatsApp, no Instagram ou no site que responde, qualifica e agenda.</p>
+          <a class="servico__botao" href="#contato" data-interesse="Agente de IA">Quero um agente de IA →</a>
+        </div>
+      </article>
+      <article class="servico" data-surge>
+        <div>
+          <h3>Automações</h3>
+          <p class="servico__promessa">Sua equipe para de fazer o que o computador faz.</p>
+        </div>
+        <div>
+          <ul class="marcas">
+            <li>Horas de volta toda semana para vender e atender</li>
+            <li>Menos erro de digitação e menos coisa esquecida</li>
+            <li>Retorno ao cliente e tarefas do dia deixam de depender da memória de alguém</li>
+          </ul>
+          <p class="servico__pratica"><b>Na prática:</b> WhatsApp, CRM, ERP, planilha e e-mail conversando entre si.</p>
+          <a class="servico__botao" href="#contato" data-interesse="Automação">Quero automatizar uma tarefa →</a>
+        </div>
+      </article>
+      <article class="servico" data-surge>
+        <div>
+          <h3>Cobrança automática</h3>
+          <p class="servico__promessa">Você recebe em dia, sem ficar cobrando na mão.</p>
+        </div>
+        <div>
+          <ul class="marcas">
+            <li>Menos atraso e menos dinheiro esquecido na rua</li>
+            <li>Lembrete educado, no dia certo, sem constrangimento para ninguém</li>
+            <li>Você vê na hora quem pagou e quem está devendo</li>
+          </ul>
+          <p class="servico__pratica"><b>Na prática:</b> lembrete pelo WhatsApp antes do vencimento, com boleto ou Pix, e aviso para você quando alguém atrasa.</p>
+          <a class="servico__botao" href="#contato" data-interesse="Cobrança automática">Quero cobrar no automático →</a>
+        </div>
+      </article>
+      <article class="servico" data-surge>
+        <div>
+          <h3>Painéis de gestão</h3>
+          <p class="servico__promessa">Os números da empresa na sua mão, sem ninguém montar planilha.</p>
+        </div>
+        <div>
+          <ul class="marcas">
+            <li>Vendas, caixa, estoque e contas a pagar numa tela só</li>
+            <li>Você vê o problema quando ele começa, não no fim do mês</li>
+            <li>Decide o que comprar, pagar e cortar olhando número real, não achismo</li>
+          </ul>
+          <p class="servico__pratica"><b>Na prática:</b> painel no computador e no celular, ligado aos sistemas que você já usa.</p>
+          <a class="servico__botao" href="#contato" data-interesse="Painel de gestão">Quero um painel da minha empresa →</a>
+        </div>
+      </article>
+      <article class="servico" data-surge>
+        <div>
+          <h3>Software sob medida</h3>
+          <p class="servico__promessa">O sistema se adapta à sua empresa, e não o contrário.</p>
+        </div>
+        <div>
+          <ul class="marcas">
+            <li>Tudo num lugar só, no lugar de planilha, papel e memória</li>
+            <li>O jeito que só a sua empresa trabalha vira vantagem, em vez de se encaixar em sistema pronto</li>
+            <li>Sem pagar por recurso que não usa e sem ficar refém de fornecedor: o código é seu</li>
+          </ul>
+          <p class="servico__pratica"><b>Na prática:</b> pedidos, estoque, agenda e financeiro, do jeito que você trabalha.</p>
+          <a class="servico__botao" href="#contato" data-interesse="Software sob medida">Quero um sistema para a minha empresa →</a>
+        </div>
+      </article>
+      <article class="servico" data-surge>
+        <div>
+          <h3>Sites sob medida</h3>
+          <p class="servico__promessa">Um site que traz cliente, e não só um endereço na internet.</p>
+        </div>
+        <div>
+          <ul class="marcas">
+            <li>Passa confiança antes da primeira conversa</li>
+            <li>Rápido no celular e preparado para aparecer no Google</li>
+            <li>Cada visita pode virar contato no WhatsApp, orçamento ou venda</li>
+          </ul>
+          <p class="servico__pratica"><b>Na prática:</b> site da empresa, página de vendas ou loja online, sem cara de modelo pronto.</p>
+          <a class="servico__botao" href="#contato" data-interesse="Site sob medida">Quero um site que traga cliente →</a>
+        </div>
+      </article>
+      <div class="oferta__fim" data-surge>
+        <p>Não sabe por onde começar? Normal. Em 20 minutos a gente descobre o que traz mais retorno primeiro.</p>
+        <a class="botao botao--tinta" href="#contato">Quero meu diagnóstico gratuito</a>
       </div>
+    </section>
+
+    <section class="custo" id="custo" data-tema="ouro" data-calculo>
+      <div class="custo__texto">
+        <h2>Quanto custa deixar o cliente esperando?</h2>
+        <p>Coloque os números da sua empresa. A conta é a mesma que fazemos no diagnóstico.</p>
+        <label>Contatos que você perde por mês por demora<output data-saida="perdidos"></output>
+          <input type="range" name="perdidos" min="2" max="100" step="1" value="10"></label>
+        <label>Quanto vale um cliente para você<output data-saida="valor"></output>
+          <input type="range" name="valor" min="50" max="5000" step="50" value="800"></label>
+        <label>Horas por semana em tarefa repetida<output data-saida="horas"></output>
+          <input type="range" name="horas" min="1" max="60" step="1" value="10"></label>
+      </div>
+      <div class="custo__conta" aria-live="polite">
+        <p>Recuperando só 3 de cada 10 contatos:</p>
+        <strong data-dinheiro>R$ 2.400</strong>
+        <p>por mês em vendas que hoje somem. E mais <b data-tempo>43 horas</b> por mês de volta para a sua equipe.</p>
+        <a class="botao botao--tinta" href="#contato" data-levar>Conferir essa conta com a gente</a>
+        <small>É uma estimativa com os seus números, não uma promessa de resultado.</small>
+      </div>
+    </section>
+
+    <section class="vivo" id="ao-vivo" data-tema="escuro" data-ao-vivo>
+      <div class="vivo__intro">
+        <h2>Faça a pergunta difícil.</h2>
+        <p>Escolha um negócio, escolha a pergunta e veja o que o agente pensa antes de responder.</p>
+        <div class="vivo__negocios" data-negocios role="group" aria-label="Escolha um negócio"></div>
+        <p class="vivo__rotulo">O cliente pergunta:</p>
+        <div class="vivo__perguntas" data-perguntas role="group" aria-label="Escolha uma pergunta"></div>
+        <p class="vivo__aviso">Demonstração simulada, com negócios fictícios. O agente da sua empresa usa os seus dados e as suas regras.</p>
+      </div>
+      <div class="fone" aria-label="Conversa de exemplo no WhatsApp" role="group">
+        <div class="fone__topo"><span data-nome>Loja Exemplo</span><small>atendido por um agente de IA</small></div>
+        <div class="fone__conversa" data-conversa aria-live="polite"></div>
+      </div>
+      <div class="vivo__mente">
+        <h3>O que ele está pensando</h3>
+        <p>Tudo fica registrado. Dá para auditar cada resposta.</p>
+        <ol class="mente" data-mente></ol>
+      </div>
+    </section>
+
+    <section class="projetos" id="projetos" data-tema="escuro">
+      <div class="projetos__topo" data-surge>
+        <h2>Não é teoria. Já construímos isso por aqui.</h2>
+        <p>Alguns projetos nossos para pequenas empresas da região, sem os nomes por respeito a cada uma. Parte deles ainda está em fase de demonstração, e a gente avisa em cada um.</p>
+      </div>
+      <div class="obras">
+        <article class="obra" data-surge>
+          <small>Em demonstração</small>
+          <h3>Recreação infantil</h3>
+          <p>Robô de atendimento no WhatsApp pela API oficial, painel com funil, agenda e financeiro, e site.</p>
+        </article>
+        <article class="obra" data-surge>
+          <small>Protótipo</small>
+          <h3>Loja de roupas</h3>
+          <p>Loja online com sacola, Pix, cartão e frete, e painel de pedidos e estoque para o dono.</p>
+        </article>
+        <article class="obra" data-surge>
+          <small>Em demonstração</small>
+          <h3>Refeições congeladas</h3>
+          <p>Site de vendas e painel de gestão, com pedido do site, do WhatsApp e do balcão no mesmo lugar.</p>
+        </article>
+        <article class="obra" data-surge>
+          <small>Sistema sob medida</small>
+          <h3>Loja de conveniência</h3>
+          <p>Painel que mostra o que comprar, o que pagar e onde o caixa está furando.</p>
+        </article>
+      </div>
+      <p class="projetos__nos" data-surge><b>A GitFlow roda assim também.</b> Nossa pesquisa, nossos roteiros e nosso relatório da semana são feitos por agentes. E nada vai ao ar sem um de nós aprovar.</p>
+    </section>
+
+    <section class="como" id="como" data-tema="papel">
+      <h2 data-surge>Automação feita às pressas funciona até alguém mudar um campo no CRM.</h2>
+      <p class="como__intro" data-surge>Por isso tratamos automação como software: com versão, com revisão e com alguém olhando.</p>
+      <ol class="fluxo">
+        <li data-surge><strong>20 minutos de conversa</strong><p>Presencial na região, online no resto do Brasil. Você sai sabendo o que traz mais retorno primeiro, mesmo que não feche com a gente.</p></li>
+        <li data-surge><strong>Prazo e valor fechados</strong><p>Você recebe o escopo antes de começar. Sem hora técnica e sem surpresa no fim do mês.</p></li>
+        <li data-surge><strong>Você testa antes de entrar</strong><p>Construímos num ambiente separado e mostramos com os seus dados. Só entra no ar depois do seu ok.</p></li>
+        <li data-surge><strong>A gente continua olhando</strong><p>Com alertas e correção. Automação que falha em silêncio é pior que nenhuma.</p></li>
+      </ol>
+      <div class="garantias" data-surge>
+        <p><b>O que é seu fica com você.</b> Código e contas no seu nome, sem ficar refém de fornecedor.</p>
+        <p><b>A IA tem limite.</b> Ela só faz o que você autorizar, e o que é sensível passa por uma pessoa.</p>
+        <p><b>Só API oficial.</b> Nada de gambiarra que coloca o número da sua empresa em risco.</p>
+      </div>
+    </section>
+
+    <section class="duvidas" id="duvidas" data-tema="escuro">
+      <h2 data-surge>O que todo dono pergunta antes de fechar</h2>
+      <div>
+        <details><summary>Meu cliente vai perceber que é um robô e não vai gostar?</summary><p>O agente se apresenta como assistente e não tenta se passar por pessoa. O que irrita é robô de menu que não entende e não deixa falar com ninguém. O nosso entende o que foi escrito e chama a sua equipe quando o assunto pede.</p></details>
+        <details><summary>E se a IA responder errado?</summary><p>Ela não fica solta. Trabalha só com as informações que você aprovou, tem limites definidos com você e passa para uma pessoa quando não tem certeza. Toda conversa fica registrada para conferir.</p></details>
+        <details><summary>Minha empresa é pequena. Isso é para mim?</summary><p>É justamente para você. Empresa pequena não tem gordura: quando o dono é quem responde, cobra e confere, cada hora de volta aparece no resultado. Na conversa a gente te fala com franqueza se vale a pena.</p></details>
+        <details><summary>Quanto custa?</summary><p>Depende do que vai ser feito, por isso fechamos o valor depois do diagnóstico, antes de começar. A pergunta que importa é quanto custa manter como está hoje. Use a calculadora acima e traga o número para a conversa.</p></details>
+        <details><summary>O WhatsApp Business já não tem IA própria?</summary><p>Tem, a Meta lançou um agente próprio e ele é cobrado por uso. Para casos simples pode bastar, e se for o seu caso a gente fala. Quando precisa consultar sua agenda, seu estoque ou seu sistema e seguir as suas regras, aí entra o que a gente constrói.</p></details>
+        <details><summary>A cobrança automática não vai incomodar meu cliente?</summary><p>Você define o tom, os dias e quem recebe. O lembrete é educado, e quem está em atraso há mais tempo passa para você decidir como tratar.</p></details>
+        <details><summary>Preciso trocar os sistemas que já uso?</summary><p>Quase nunca. Conectamos o que você já tem. Só sugerimos trocar quando a ferramenta atual realmente impede a automação.</p></details>
+        <details><summary>E se parar de funcionar?</summary><p>As automações são monitoradas. Quando algo sai do normal, o alerta chega para nós e a gente corrige. E você fala direto com quem construiu.</p></details>
+        <details><summary>Meus dados ficam seguros?</summary><p>Usamos as permissões mínimas necessárias, seguimos a LGPD e documentamos por onde cada dado passa.</p></details>
+      </div>
+    </section>
+
+    <section class="contato" id="contato" data-tema="ouro">
+      <div>
+        <h2>Em 20 minutos você sabe o que fazer primeiro.</h2>
+        <p>Sem compromisso e sem apresentação de vendas. Você fala direto com o Rafa ou com o Lucas, e sai com a conta feita, feche com a gente ou não.</p>
+        <p class="contato__socios"><a href="https://www.instagram.com/rafinha_doridio/" rel="noopener">Rafa @rafinha_doridio</a><a href="https://www.instagram.com/lucasveloso_vs/" rel="noopener">Lucas @lucasveloso_vs</a></p>
+      </div>
+      <form class="form" data-contato novalidate>
+        <label>Seu nome<input name="nome" autocomplete="name" required></label>
+        <label>Sua empresa<input name="empresa" autocomplete="organization"></label>
+        <label>O que você procura?<select name="interesse" data-interesse-campo>
+          <option>Ainda não sei</option>
+          <option>Agente de IA</option>
+          <option>Automação</option>
+          <option>Cobrança automática</option>
+          <option>Painel de gestão</option>
+          <option>Software sob medida</option>
+          <option>Site sob medida</option>
+        </select></label>
+        <label>O que mais toma o seu tempo hoje?<textarea name="processo" rows="3" required placeholder="Ex.: responder orçamento no WhatsApp"></textarea></label>
+        <button type="submit" class="botao botao--tinta">Pedir meu diagnóstico pelo WhatsApp</button>
+        <small>Abre o WhatsApp com a mensagem pronta. Nada é enviado sem você apertar enviar.</small>
+      </form>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer__inner">
-      <a class="brand" href="#topo"><img src="assets/img/logo-horizontal-escuro.svg" alt="GitFlow Automations"></a>
-      <nav class="footer__links" aria-label="Redes">
-        <a href="https://www.instagram.com/gitflow.ia/" data-instagram rel="noopener">Instagram @gitflow.ia</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <p class="footer__copy mono">© <span data-ano>2026</span> GitFlow Automations</p>
-    </div>
+  <footer class="rodape" data-tema="escuro">
+    <img src="assets/img/logo-horizontal-escuro.svg" alt="GitFlow Automations" width="170">
+    <a href="https://www.instagram.com/gitflow.ia/" data-instagram rel="noopener">Instagram @gitflow.ia</a>
+    <span>© <span data-ano>2026</span> GitFlow Automations · Três Pontas, MG</span>
   </footer>
 
-  <script src="assets/js/main.js" defer></script>
+  <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
+
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/ao-vivo.js" defer></script>
+  <script src="assets/js/materia.js" defer></script>
 </body>
 </html>
