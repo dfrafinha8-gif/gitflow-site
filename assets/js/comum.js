@@ -2,7 +2,8 @@
 const CONFIG = {
   whatsapp: '5535998943008', // só dígitos, com DDI e DDD
   instagram: 'https://www.instagram.com/gitflow.ia/',
-  medicao: '', // id do site no Umami (sem cookies); vazio deixa a medição desligada
+  medicao: '11155323-34d2-4bf7-992c-25a5d8aaff16', // id do site no Umami (sem cookies); vazio deixa a medição desligada
+  dominio: 'dfrafinha8-gif.github.io', // só este endereço é medido; trocar quando houver domínio próprio
 };
 
 // Medição: só eventos anônimos, nunca nome, empresa ou o que a pessoa escreveu
@@ -12,6 +13,7 @@ if (CONFIG.medicao) {
   script.defer = true;
   script.src = 'https://cloud.umami.is/script.js';
   script.dataset.websiteId = CONFIG.medicao;
+  script.dataset.domains = CONFIG.dominio;
   document.head.append(script);
   document.querySelector('[data-medicao]').hidden = false;
 }
