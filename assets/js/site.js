@@ -2,7 +2,19 @@
 const CONFIG = {
   whatsapp: '5535998943008', // só dígitos, com DDI e DDD
   instagram: 'https://www.instagram.com/gitflow.ia/',
+  medicao: '', // id do site no Umami (sem cookies); vazio deixa a medição desligada
 };
+
+// Medição: só eventos anônimos, nunca nome, empresa ou o que a pessoa escreveu
+const medir = (evento, dados) => window.umami?.track(evento, dados);
+if (CONFIG.medicao) {
+  const script = document.createElement('script');
+  script.defer = true;
+  script.src = 'https://cloud.umami.is/script.js';
+  script.dataset.websiteId = CONFIG.medicao;
+  document.head.append(script);
+  document.querySelector('[data-medicao]').hidden = false;
+}
 
 const reais = (v) => `R$ ${Math.round(v).toLocaleString('pt-BR')}`;
 const abrirWhatsApp = (texto) => window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
@@ -23,6 +35,21 @@ document.addEventListener('tema', marcarNav);
 // O botão fixo do celular some quando o formulário já está na tela
 const fixo = document.querySelector('[data-fixo]');
 new IntersectionObserver(([v]) => { fixo.dataset.fora = v.isIntersecting; }).observe(document.querySelector('#contato'));
+
+// Até onde as pessoas chegam na página
+const olhoSecao = new IntersectionObserver((vistas) => {
+  vistas.filter((v) => v.isIntersecting).forEach((v) => {
+    medir('chegou-secao', { secao: v.target.id });
+    olhoSecao.unobserve(v.target);
+  });
+}, { threshold: .2 });
+['o-que-fazemos', 'custo', 'ao-vivo', 'projetos', 'contato'].forEach((id) => olhoSecao.observe(document.getElementById(id)));
+
+// Cliques que levam ao contato, e de onde eles vêm
+document.querySelectorAll('a[href="#contato"]').forEach((a) => {
+  a.addEventListener('click', () => medir('botao-contato', { origem: a.closest('section, header')?.id || a.dataset.fixo !== undefined && 'fixo' || 'menu', servico: a.dataset.interesse || 'nenhum' }));
+});
+document.querySelector('[data-pular]').addEventListener('click', () => medir('pulou-historia'));
 
 // Blocos que entram ao rolar
 const olhoSurge = new IntersectionObserver((vistas) => {
@@ -62,7 +89,12 @@ function calcular() {
     requestAnimationFrame(contar);
   }
 }
-calculo.querySelectorAll('input').forEach((i) => i.addEventListener('input', calcular));
+let calculou = false;
+calculo.querySelectorAll('input').forEach((i) => i.addEventListener('input', () => {
+  calcular();
+  if (!calculou) medir('calculadora-usada');
+  calculou = true;
+}));
 calcular();
 
 // Leva a conta feita para o formulário de contato
@@ -86,6 +118,7 @@ form.addEventListener('submit', (e) => {
   if (invalido) return invalido.focus();
 
   const dados = Object.fromEntries(new FormData(form));
+  medir('formulario-enviado', { interesse: dados.interesse, com_calculadora: !!conta });
   abrirWhatsApp(`Olá! Sou ${dados.nome}${dados.empresa ? `, da ${dados.empresa}` : ''}. Quero o diagnóstico gratuito. Procuro: ${dados.interesse}. O que mais toma meu tempo hoje: ${dados.processo}.${conta}`);
 });
 

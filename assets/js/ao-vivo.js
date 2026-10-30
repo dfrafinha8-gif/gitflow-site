@@ -137,7 +137,10 @@
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = item.q;
-      b.addEventListener('click', () => perguntar(item, b));
+      b.addEventListener('click', (e) => {
+        if (e.isTrusted) medir('demo-pergunta', { negocio: titulo, pergunta: item.q });
+        perguntar(item, b);
+      });
       perguntas.append(b);
     });
     return perguntas.firstChild;
