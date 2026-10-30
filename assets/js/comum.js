@@ -1,6 +1,6 @@
 // Configuração do site: é aqui que se troca o WhatsApp de todas as páginas (o checklist tem o seu próprio)
 const CONFIG = {
-  whatsapp: '5535998943008', // só dígitos, com DDI e DDD
+  whatsapp: '553598943008', // só dígitos, com DDI e DDD; a conta está registrada sem o 9, com ele o link dá erro
   instagram: 'https://www.instagram.com/gitflow.ia/',
   medicao: '11155323-34d2-4bf7-992c-25a5d8aaff16', // id do site no Umami (sem cookies); vazio deixa a medição desligada
   dominio: 'dfrafinha8-gif.github.io', // só este endereço é medido; trocar quando houver domínio próprio
