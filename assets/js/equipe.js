@@ -54,7 +54,7 @@ if (secao) {
   new IntersectionObserver(([v], olho) => {
     if (!v.isIntersecting) return;
     olho.disconnect();
-    iniciar3D().catch(() => secao.classList.add('equipe--sem-3d'));
+    iniciar3D().catch((erro) => { secao.classList.add('equipe--sem-3d'); console.error('equipe 3D:', erro); });
   }, { rootMargin: '400px 0px' }).observe(secao);
 
   async function iniciar3D() {
@@ -111,7 +111,7 @@ if (secao) {
       return new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: 0.07, bevelEnabled: true, bevelSize: 0.015, bevelThickness: 0.015, bevelSegments: 2 }), mat);
     }
 
-    function montar(def) {
+    function montar(def, destino = cena) {
       const g = new THREE.Group(), corpoMat = M[def.corpo], extra = {};
       const sombra = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 1.9), new THREE.MeshBasicMaterial({ map: sombraTex, transparent: true, depthWrite: false }));
       sombra.rotation.x = -Math.PI / 2; sombra.position.y = 0.01; g.add(sombra);
@@ -184,14 +184,14 @@ if (secao) {
         });
       }
       const alvo = new THREE.Mesh(new THREE.BoxGeometry(1.5, 3, 1.2), new THREE.MeshBasicMaterial({ visible: false })); alvo.position.y = 1.4; g.add(alvo);
-      cena.add(g);
+      destino.add(g);
       return {
         def, g, boneco, cabeca, bracos, pernas, olhos, olhoMat, brilho: olhoMat.emissiveIntensity, extra, alvo,
         base: new THREE.Vector3(), pos: new THREE.Vector3(), destino: new THREE.Vector3(),
         rot: 0, passo: 0, andar: 0, k: 0, ativa: 0, fase: Math.random() * 6, piscar: 2 + Math.random() * 4,
       };
     }
-    const robos = EQUIPE.map(montar);
+    const robos = EQUIPE.map((d) => montar(d));
 
     let largura = 1, altura = 1, emCelular = false, camZ = 10, camY = 2.2, olharY = 1.45, olharX = 0;
     const centro = new THREE.Vector3();
@@ -279,6 +279,34 @@ if (secao) {
     new IntersectionObserver(([e]) => { visivel = e.isIntersecting; if (visivel) { relogio.getDelta(); pedir(); } }).observe(palco);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) { relogio.getDelta(); pedir(); } });
 
+    // o gesto de cada serviço; k vai de 0 (parado) a 1 (gesto inteiro), a é o quanto ele está andando
+    function gesto(r, k, a, t, dt, mov, suave) {
+      const E = r.extra;
+      if (r.def.tipo === 'agente') {
+        r.bracos[1].rotation.z = 0.12 + a * 0.08 + k * (2.3 + Math.sin(t * 9) * 0.35 * mov);
+        E.balao.scale.setScalar(Math.max(0.001, k));
+        E.pontos.forEach((p, j) => { p.position.y = Math.max(0, Math.sin(t * 6 - j * 0.8)) * 0.05 * mov; });
+      }
+      if (r.def.tipo === 'automacao') {
+        const vel = (0.4 + a * 2 + k * 4) * mov; E.e1.rotation.z += dt * vel; E.e2.rotation.z -= dt * vel * 1.5;
+        r.bracos[0].rotation.x += -k * (0.9 + Math.sin(t * 7) * 0.4 * mov);
+      }
+      if (r.def.tipo === 'cobranca') {
+        r.bracos[1].rotation.x += -k * 1.3;
+        E.moeda.rotation.y += dt * (1 + k * 7) * mov;
+        E.moeda.position.y = -0.95 + Math.abs(Math.sin(t * 4)) * k * 0.14 * mov;
+      }
+      if (r.def.tipo === 'painel') {
+        E.barras.forEach((b, j) => { b.scale.y = Math.max(0.15, b.userData.h * (0.35 + 0.65 * k * (0.75 + 0.25 * Math.sin(t * 3 + j) * mov))); b.position.y = -0.2 + 0.15 * b.scale.y; });
+        r.bracos[0].rotation.x += -k * 0.5; r.bracos[0].rotation.z += -k * 0.6;
+      }
+      if (r.def.tipo === 'software') {
+        E.blocos.forEach((c, j) => { c.position.lerp(k > 0.5 ? c.userData.pilha : c.userData.solto, suave(4 - j)); c.rotation.y += ((k > 0.5 ? 0 : j * 0.6) - c.rotation.y) * suave(5); });
+        r.bracos[1].rotation.x += -k * 0.8 * (0.7 + 0.3 * Math.sin(t * 5) * mov);
+      }
+      if (r.def.tipo === 'site') { E.cursor.position.x = 0.3 - k * 0.3; E.cursor.position.y = 2.05 - k * 0.26; E.botao.material.emissiveIntensity = 1.2 + k * (1.5 + Math.sin(t * 6) * 0.8 * mov) + r.ativa * 3; }
+    }
+
     function laco() {
       pedido = 0;
       const dt = Math.min(relogio.getDelta(), 0.1), t = relogio.elapsedTime, mov = quieto ? 0 : 1;
@@ -344,29 +372,7 @@ if (secao) {
         r.olhoMat.emissiveIntensity = r.brilho * (lider && !escolhidoAgora ? 0.55 : 1) + r.ativa * 4;
         if (E.ponta) E.ponta.material.emissiveIntensity = 1.6 + Math.sin(t * 3 + r.fase) * 0.6 * mov + k + r.ativa * 3;
 
-        if (r.def.tipo === 'agente') {
-          r.bracos[1].rotation.z = 0.12 + a * 0.08 + k * (2.3 + Math.sin(t * 9) * 0.35 * mov);
-          E.balao.scale.setScalar(Math.max(0.001, k));
-          E.pontos.forEach((p, j) => { p.position.y = Math.max(0, Math.sin(t * 6 - j * 0.8)) * 0.05 * mov; });
-        }
-        if (r.def.tipo === 'automacao') {
-          const vel = (0.4 + a * 2 + k * 4) * mov; E.e1.rotation.z += dt * vel; E.e2.rotation.z -= dt * vel * 1.5;
-          r.bracos[0].rotation.x += -k * (0.9 + Math.sin(t * 7) * 0.4 * mov);
-        }
-        if (r.def.tipo === 'cobranca') {
-          r.bracos[1].rotation.x += -k * 1.3;
-          E.moeda.rotation.y += dt * (1 + k * 7) * mov;
-          E.moeda.position.y = -0.95 + Math.abs(Math.sin(t * 4)) * k * 0.14 * mov;
-        }
-        if (r.def.tipo === 'painel') {
-          E.barras.forEach((b, j) => { b.scale.y = Math.max(0.15, b.userData.h * (0.35 + 0.65 * k * (0.75 + 0.25 * Math.sin(t * 3 + j) * mov))); b.position.y = -0.2 + 0.15 * b.scale.y; });
-          r.bracos[0].rotation.x += -k * 0.5; r.bracos[0].rotation.z += -k * 0.6;
-        }
-        if (r.def.tipo === 'software') {
-          E.blocos.forEach((c, j) => { c.position.lerp(k > 0.5 ? c.userData.pilha : c.userData.solto, suave(4 - j)); c.rotation.y += ((k > 0.5 ? 0 : j * 0.6) - c.rotation.y) * suave(5); });
-          r.bracos[1].rotation.x += -k * 0.8 * (0.7 + 0.3 * Math.sin(t * 5) * mov);
-        }
-        if (r.def.tipo === 'site') { E.cursor.position.x = 0.3 - k * 0.3; E.cursor.position.y = 2.05 - k * 0.26; E.botao.material.emissiveIntensity = 1.2 + k * (1.5 + Math.sin(t * 6) * 0.8 * mov) + r.ativa * 3; }
+        gesto(r, k, a, t, dt, mov, suave);
       });
 
       // luz de palco e câmera chegando um pouco mais perto quando alguém está no centro
@@ -407,5 +413,97 @@ if (secao) {
       if (!quieto || !parado || Math.abs(camera.position.z - zAlvo) > 0.01 || Math.abs(anelMat.opacity - (lider && chegou ? 0.85 : 0)) > 0.01) pedir();
     }
     pedir();
+    iniciarAcompanha();
+
+    // Robô que acompanha a rolagem em "O que fazemos": fica no vão entre o texto e a demonstração de cada
+    // serviço e troca de robô, num feixe de luz, quando a pessoa chega ao próximo serviço. Só em tela larga.
+    function iniciarAcompanha() {
+      const oferta = document.querySelector('#o-que-fazemos');
+      const linhas = oferta ? [...oferta.querySelectorAll('.servico')] : [];
+      if (linhas.length !== EQUIPE.length || !matchMedia('(min-width: 1250px)').matches) return;
+      oferta.classList.add('oferta--acompanha');
+      const trilha = document.createElement('div');
+      trilha.className = 'acompanha';
+      trilha.setAttribute('aria-hidden', 'true');
+      trilha.innerHTML = '<div class="acompanha__palco"><p class="acompanha__nome"></p></div>';
+      oferta.append(trilha);
+      const palcoA = trilha.firstElementChild, nomeEl = palcoA.firstElementChild;
+      const r2 = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      r2.setPixelRatio(Math.min(devicePixelRatio, 2));
+      r2.toneMapping = THREE.ACESFilmicToneMapping;
+      r2.setSize(210, 280, false);
+      palcoA.prepend(r2.domElement);
+      const c2 = new THREE.Scene();
+      c2.environment = new THREE.PMREMGenerator(r2).fromScene(new RoomEnvironment(), 0.04).texture;
+      c2.add(new THREE.HemisphereLight(0xE8ECF2, 0x07090D, 0.5));
+      const luz2 = new THREE.DirectionalLight(0xFFE9C4, 1.6); luz2.position.set(3, 6, 5); c2.add(luz2);
+      const cam2 = new THREE.PerspectiveCamera(30, 210 / 280, 0.1, 50);
+      cam2.position.set(0, 1.9, 8.6); cam2.lookAt(0, 1.5, 0);
+      const bots = EQUIPE.map((d) => { const b = montar(d, c2); b.g.visible = false; b.g.rotation.y = 0.35; return b; });
+      // o feixe do teletransporte
+      const feixeMat = new THREE.MeshBasicMaterial({ color: 0xF3DFA2, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
+      const feixe = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 4.4, 40, 1, true), feixeMat);
+      feixe.position.y = 2; c2.add(feixe);
+
+      // a trilha ocupa só a altura da lista de serviços, no meio do vão entre as duas colunas
+      const ajustar = () => {
+        const primeira = linhas[0], ultima = linhas.at(-1), demo = primeira.querySelector('.demo');
+        const vao = parseFloat(getComputedStyle(primeira).columnGap) || 200;
+        trilha.style.top = `${primeira.offsetTop}px`;
+        trilha.style.height = `${ultima.offsetTop + ultima.offsetHeight - primeira.offsetTop}px`;
+        trilha.style.left = `${demo.offsetLeft - vao / 2 - 105}px`;
+      };
+      new ResizeObserver(ajustar).observe(oferta);
+      ajustar();
+
+      let atual = -1, proximo = -1, fase = 0, desde = 0, rodando2 = false, pedido2 = 0;
+      const dur = quieto ? 0.0001 : 0.38;
+      const olho = new IntersectionObserver((vistos) => vistos.forEach((v) => { if (v.isIntersecting) { proximo = linhas.indexOf(v.target); pedir2(); } }), { rootMargin: '-45% 0px -45% 0px' });
+      linhas.forEach((l) => olho.observe(l));
+      new IntersectionObserver(([v]) => { rodando2 = v.isIntersecting; if (rodando2) { relogio2.getDelta(); pedir2(); } }).observe(trilha);
+      const relogio2 = new THREE.Clock();
+      function pedir2() { if (!pedido2 && rodando2 && !document.hidden) pedido2 = requestAnimationFrame(quadro2); }
+      const nomear = (i) => { nomeEl.textContent = `${EQUIPE[i].codigo} ${EQUIPE[i].nome}`; };
+
+      function quadro2() {
+        pedido2 = 0;
+        const dt = Math.min(relogio2.getDelta(), 0.1), t = relogio2.elapsedTime, mov = quieto ? 0 : 1, suave = (f) => Math.min(1, dt * f);
+        if (proximo >= 0 && proximo !== atual && fase === 0) {
+          desde = t;
+          if (atual < 0) { atual = proximo; bots[atual].g.visible = true; nomear(atual); fase = 2; } else fase = 1;
+        }
+        const p = (t - desde) / dur;
+        if (fase === 1) {
+          // o atual some para cima dentro do feixe
+          const b = bots[atual], e = Math.min(1, p);
+          b.g.scale.set(1 - e * 0.6, Math.max(0.01, 1 - e), 1 - e * 0.6);
+          feixeMat.opacity = e * 0.45;
+          if (p >= 1) { b.g.visible = false; b.g.scale.setScalar(1); b.k = 0; atual = proximo; bots[atual].g.visible = true; nomear(atual); fase = 2; desde = t; }
+        } else if (fase === 2) {
+          // o novo aparece de baixo para cima e acende
+          const b = bots[atual], e = Math.min(1, p);
+          b.g.scale.set(0.4 + 0.6 * e, Math.max(0.01, e), 0.4 + 0.6 * e);
+          feixeMat.opacity = (1 - e) * 0.45;
+          if (p >= 1) { fase = 0; b.g.scale.setScalar(1); feixeMat.opacity = 0; b.ativa = 1; }
+        }
+        trilha.dataset.ligado = String(atual >= 0);
+        const b = bots[atual];
+        if (b) {
+          b.boneco.position.y = Math.sin(t * 1.6) * 0.04 * mov;
+          b.cabeca.rotation.y = (0.2 + Math.sin(t * 0.8) * 0.15) * mov;
+          b.piscar -= dt;
+          if (b.piscar < 0) b.piscar = 2.5 + Math.random() * 4;
+          b.olhos.forEach((o) => { o.scale.y = b.piscar < 0.12 && !quieto ? 0.15 : 1; });
+          b.ativa = Math.max(0, b.ativa - dt * 1.1);
+          b.olhoMat.emissiveIntensity = b.brilho + b.ativa * 4;
+          b.k += ((fase === 0 ? 1 : 0) - b.k) * suave(4);
+          // os gestos somam em cima da posição de descanso dos braços, então ela volta a cada quadro
+          b.bracos[0].rotation.set(0, 0, -0.12); b.bracos[1].rotation.set(0, 0, 0.12);
+          gesto(b, b.k, 0, t, dt, mov, suave);
+        }
+        r2.render(c2, cam2);
+        if (!quieto || fase !== 0 || (b && Math.abs(b.k - 1) > 0.002)) pedir2();
+      }
+    }
   }
 }
