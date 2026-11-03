@@ -33,6 +33,7 @@
   <header class="nav" data-nav>
     <a class="nav__marca" href="#topo">GitFlow Automations</a>
     <nav aria-label="Principal">
+      <a href="#equipe">A equipe</a>
       <a href="#o-que-fazemos">O que fazemos</a>
       <a href="#custo">Quanto custa esperar</a>
       <a href="#ao-vivo">Testar o agente</a>
@@ -149,6 +150,19 @@
 
         <a class="palco__pular" href="#o-que-fazemos" data-pular>Pular a história</a>
       </div>
+    </section>
+
+    <section class="equipe" id="equipe" data-tema="escuro" data-equipe aria-labelledby="titulo-equipe">
+      <div class="equipe__topo">
+        <h2 id="titulo-equipe">Conheça a equipe.</h2>
+        <p>Seis robôs que a gente constrói e coloca para trabalhar na sua empresa. Passe o mouse ou toque em cada um para ver o que ele faz.</p>
+      </div>
+      <div class="equipe__palco" data-equipe-palco>
+        <img class="equipe__poster" src="assets/img/equipe.webp" width="1600" height="640" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="equipe__nomes" data-equipe-nomes role="group" aria-label="Escolha um robô"></div>
+      <div class="equipe__ficha" data-equipe-ficha aria-live="polite"></div>
+      <p class="equipe__aviso">Os robôs são o jeito da gente mostrar cada serviço. Na sua empresa, eles são software: trabalham no seu WhatsApp, no seu sistema e no seu site.</p>
     </section>
 
     <section class="oferta" id="o-que-fazemos" data-tema="papel">
@@ -513,5 +527,6 @@
   <script src="assets/js/ao-vivo.js" defer></script>
   <script src="assets/js/materia.js" defer></script>
   <script src="assets/js/demos.js" defer></script>
+  <script src="assets/js/equipe.js" type="module"></script>
 </body>
 </html>

@@ -117,6 +117,35 @@ html:not(.js) .palco canvas, html:not(.js) .palco__pular, html:not(.js) .aviso, 
 html:not(.js) .abre { position: static; padding: 0 var(--borda) 30px; width: auto; }
 html:not(.js) .cartao { margin-top: 20px; }
 
+/* A equipe de robôs (assets/js/equipe.js) */
+.equipe { position: relative; padding: clamp(70px, 9vw, 130px) var(--borda) clamp(40px, 5vw, 70px); background: radial-gradient(70vw 50vh at 50% 100%, rgba(201, 139, 78, .14), transparent 70%), var(--fundo); }
+.equipe__topo { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(20px, 4vw, 70px); align-items: end; }
+.equipe__topo p { font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--prata); }
+.equipe__palco { position: relative; height: clamp(360px, 54vh, 580px); margin-top: clamp(10px, 2vw, 30px); }
+.equipe__palco canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; }
+.equipe__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .4s; }
+.equipe--3d .equipe__poster { opacity: 0; }
+.equipe__nomes { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; }
+.equipe__nomes button { all: unset; cursor: pointer; padding: 8px 0; border-bottom: 2px solid var(--fio); font-family: var(--titulo); font-stretch: 125%; font-weight: 500; font-size: .98rem; color: var(--prata); transition: color .2s, border-color .2s; }
+.equipe__nomes button small { font: 400 .72rem 'IBM Plex Mono', monospace; color: var(--apagado); margin-right: 6px; }
+.equipe__nomes button:hover, .equipe__nomes button[aria-pressed=true] { color: var(--ouro); border-color: var(--ouro); }
+.equipe__nomes button:focus-visible { outline: 2px solid var(--ouro); outline-offset: 4px; }
+.equipe__ficha { position: absolute; z-index: 3; left: 50%; top: 40%; width: min(350px, calc(100vw - 32px)); padding: 18px 18px 16px; background: rgba(12, 16, 22, .95); border: 1px solid var(--fio); border-radius: 16px; box-shadow: 0 30px 70px rgba(0, 0, 0, .55); opacity: 0; transform: translateY(10px) scale(.98); transition: opacity .25s, transform .35s var(--mola); pointer-events: none; }
+.equipe__ficha[data-aberta=true] { opacity: 1; transform: none; pointer-events: auto; }
+.equipe__codigo { display: flex; justify-content: space-between; gap: 12px; font-size: .78rem; color: var(--apagado); }
+.equipe__codigo b { font-weight: 500; color: var(--bronze); }
+.equipe__ficha h3 { font-size: 1.6rem; margin: 4px 0 6px; color: var(--ouro); }
+.equipe__ficha ul { list-style: none; padding: 0; margin: 12px 0; }
+.equipe__ficha li { position: relative; padding: 6px 0 6px 18px; border-top: 1px solid var(--fio); font-size: .9rem; color: var(--prata); }
+.equipe__ficha li::before { content: ""; position: absolute; left: 0; top: 13px; width: 7px; height: 7px; border-radius: 50%; background: var(--ouro); }
+.equipe__ficha dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: .82rem; margin-bottom: 14px; }
+.equipe__ficha dt { color: var(--apagado); }
+.equipe__ficha dd { margin: 0; }
+.equipe__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.equipe__acoes .botao { padding: 11px 16px; font-size: .92rem; }
+.equipe__acoes a:not(.botao) { font-size: .9rem; text-underline-offset: 4px; }
+.equipe__aviso { margin-top: 16px; text-align: center; font-size: .82rem; color: var(--apagado); }
+
 /* Calculadora */
 .custo { background: var(--ouro); color: var(--tinta); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 100px); padding: clamp(70px, 9vw, 130px) var(--borda); }
 .custo__texto > p { margin: 18px 0 clamp(24px, 3vw, 40px); font-size: clamp(1.05rem, 1.4vw, 1.3rem); max-width: 38ch; }
@@ -383,7 +412,7 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
   .vivo { grid-template-columns: 1fr; }
   .fone { height: 540px; }
   .mente { min-height: 0; max-height: none; }
-  .custo, .duvidas, .projetos__topo, .oferta__topo, .pag-entrega { grid-template-columns: 1fr; }
+  .custo, .duvidas, .projetos__topo, .oferta__topo, .pag-entrega, .equipe__topo { grid-template-columns: 1fr; }
   .pag-muda__lista { grid-template-columns: 1fr; }
   .pag-abre.pag-abre--demo { grid-template-columns: 1fr; row-gap: 44px; }
   .pag-abre--demo .demo { max-width: 460px; }
@@ -414,6 +443,9 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
   .demo { min-height: 0; }
   .fluxo li { gap: 8px; }
   .obras { grid-template-columns: 1fr; }
+  .equipe__palco { height: min(118vw, 520px); }
+  .equipe__ficha { position: static; display: none; width: auto; margin-top: 18px; box-shadow: none; }
+  .equipe__ficha[data-aberta=true] { display: block; }
   .obra.obra--tela, .obra.obra--tela:nth-child(even) { grid-template-columns: 1fr; }
   .obra--tela:nth-child(even) .obra__tela { order: 0; }
   .custo__conta strong { font-size: clamp(3rem, 15vw, 5rem); }
