@@ -38,13 +38,31 @@
   </header>
 
   <main id="conteudo">
-    <section class="pag-abre" id="topo" data-tema="escuro">
-      <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Serviços</li><li aria-current="page">Painéis de gestão</li></ol></nav>
-      <h1>Os números da empresa na sua mão, <b>sem ninguém montar planilha.</b></h1>
-      <p>Um painel no computador e no celular, ligado aos sistemas que você já usa, que mostra o que precisa da sua atenção hoje.</p>
-      <div class="abre__botoes">
-        <a class="botao" href="#contato" data-interesse="Painel de gestão">Quero meu diagnóstico gratuito</a>
-        <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+    <section class="pag-abre pag-abre--demo" id="topo" data-tema="escuro">
+      <div class="pag-abre__texto">
+        <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Serviços</li><li aria-current="page">Painéis de gestão</li></ol></nav>
+        <h1>Os números da empresa na sua mão, <b>sem ninguém montar planilha.</b></h1>
+        <p>Um painel no computador e no celular, ligado aos sistemas que você já usa, que mostra o que precisa da sua atenção hoje.</p>
+        <div class="abre__botoes">
+          <a class="botao" href="#contato" data-interesse="Painel de gestão">Quero meu diagnóstico gratuito</a>
+          <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+        </div>
+      </div>
+      <div class="demo" data-demo aria-hidden="true">
+        <p class="demo__topo">Painel da empresa<span>hoje, 9h</span></p>
+        <div class="demo__corpo">
+          <div class="demo__kpis">
+            <p data-em="300"><b data-conta="4870" data-moeda>R$ 4.870</b><span>vendas hoje</span></p>
+            <p data-em="500"><b data-conta="23">23</b><span>pedidos</span></p>
+            <p data-em="700"><b data-conta="2">2</b><span>esperam você</span></p>
+          </div>
+          <div class="demo__barras" data-em="1200">
+            <i style="--h:46%;--i:0"></i><i style="--h:62%;--i:1"></i><i style="--h:38%;--i:2"></i><i style="--h:70%;--i:3"></i><i style="--h:84%;--i:4"></i><i style="--h:58%;--i:5"></i><i style="--h:92%;--i:6"></i>
+          </div>
+          <p class="demo__dias"><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span><span>hoje</span></p>
+          <p class="demo__alerta" data-em="2800">Estoque: 3 produtos acabam essa semana.</p>
+        </div>
+        <small class="demo__nota">Números de exemplo</small>
       </div>
     </section>
 
@@ -152,5 +170,6 @@
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
   <script src="../../assets/js/comum.js" defer></script>
+  <script src="../../assets/js/demos.js" defer></script>
 </body>
 </html>

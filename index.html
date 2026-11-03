@@ -157,11 +157,11 @@
         <p>Você contrata tecnologia para vender mais, gastar menos tempo com tarefa repetida e saber o que acontece na sua empresa. Estas são as seis formas como a gente faz isso.</p>
       </div>
       <article class="servico">
-        <div>
+        <div class="servico__cabeca">
           <h3>Agentes de IA</h3>
           <p class="servico__promessa">Todo cliente atendido na hora, sem aumentar a equipe.</p>
         </div>
-        <div>
+        <div class="servico__detalhe">
           <ul class="marcas">
             <li>Nenhum contato fica sem resposta, nem à noite nem no fim de semana</li>
             <li>Menos venda perdida para quem respondeu primeiro</li>
@@ -170,13 +170,26 @@
           <p class="servico__pratica"><b>Na prática:</b> agente no WhatsApp, no Instagram ou no site que responde, qualifica e agenda.</p>
           <div class="servico__links"><a class="servico__botao" href="#contato" data-interesse="Agente de IA">Quero um agente de IA</a><a href="servicos/agentes-de-ia/">Ver como funciona</a></div>
         </div>
+        <!-- demo:agentes-de-ia (gerada por scripts/gerar-paginas-site.mjs) -->
+        <div class="demo" data-demo aria-hidden="true">
+          <p class="demo__topo">WhatsApp da empresa<span>23:14</span></p>
+          <div class="demo__corpo">
+            <p class="bolha" data-em="300">Boa noite! Vocês atendem sábado?</p>
+            <p class="bolha bolha--agente" data-em="1100" data-troca="1900"><span class="demo__antes">digitando…</span><span class="demo__depois">Atendemos sim, das 8h às 13h. Quer que eu reserve um horário?</span></p>
+            <p class="bolha" data-em="3300">Quero, às 10h</p>
+            <p class="bolha bolha--agente" data-em="4100" data-troca="4800"><span class="demo__antes">digitando…</span><span class="demo__depois">Pronto, sábado às 10h. Te mando um lembrete na sexta. 👍</span></p>
+            <p class="demo__selo" data-em="5800">Horário salvo na agenda, sem ninguém acordado</p>
+          </div>
+          <small class="demo__nota">Conversa de exemplo</small>
+        </div>
+        <!-- /demo -->
       </article>
       <article class="servico">
-        <div>
+        <div class="servico__cabeca">
           <h3>Automações</h3>
           <p class="servico__promessa">Sua equipe para de fazer o que o computador faz.</p>
         </div>
-        <div>
+        <div class="servico__detalhe">
           <ul class="marcas">
             <li>Horas de volta toda semana para vender e atender</li>
             <li>Menos erro de digitação e menos coisa esquecida</li>
@@ -185,13 +198,28 @@
           <p class="servico__pratica"><b>Na prática:</b> WhatsApp, CRM, ERP, planilha e e-mail conversando entre si.</p>
           <div class="servico__links"><a class="servico__botao" href="#contato" data-interesse="Automação">Quero automatizar uma tarefa</a><a href="servicos/automacoes/">Ver como funciona</a></div>
         </div>
+        <!-- demo:automacoes (gerada por scripts/gerar-paginas-site.mjs) -->
+        <div class="demo" data-demo aria-hidden="true">
+          <p class="demo__topo">Pedido novo<span>agora</span></p>
+          <div class="demo__corpo">
+            <ol class="demo__fluxo">
+              <li data-em="400"><b>Pedido chegou pelo WhatsApp</b><span>Maria, 2 itens</span></li>
+              <li data-em="1400"><b>Lançado no sistema</b><span>sem ninguém digitar</span></li>
+              <li data-em="2400"><b>Estoque atualizado</b><span>2 unidades baixadas</span></li>
+              <li data-em="3400"><b>Equipe avisada</b><span>separar até as 14h</span></li>
+            </ol>
+            <p class="demo__total" data-em="4300">Tarefas feitas sozinhas hoje<b data-conta="37">37</b></p>
+          </div>
+          <small class="demo__nota">Exemplo</small>
+        </div>
+        <!-- /demo -->
       </article>
       <article class="servico">
-        <div>
+        <div class="servico__cabeca">
           <h3>Cobrança automática</h3>
           <p class="servico__promessa">Você recebe em dia, sem ficar cobrando na mão.</p>
         </div>
-        <div>
+        <div class="servico__detalhe">
           <ul class="marcas">
             <li>Menos atraso e menos dinheiro esquecido na rua</li>
             <li>Lembrete educado, no dia certo, sem constrangimento para ninguém</li>
@@ -200,13 +228,28 @@
           <p class="servico__pratica"><b>Na prática:</b> lembrete pelo WhatsApp antes do vencimento, com boleto ou Pix, e aviso para você quando alguém atrasa.</p>
           <div class="servico__links"><a class="servico__botao" href="#contato" data-interesse="Cobrança automática">Quero cobrar no automático</a><a href="servicos/cobranca-automatica/">Ver como funciona</a></div>
         </div>
+        <!-- demo:cobranca-automatica (gerada por scripts/gerar-paginas-site.mjs) -->
+        <div class="demo" data-demo aria-hidden="true">
+          <p class="demo__topo">Cobrança automática<span>Novembro</span></p>
+          <div class="demo__corpo">
+            <ul class="demo__cobrancas">
+              <li data-em="300" data-troca="1700"><span>Carla M.</span><b>R$ 180</b><i><span class="demo__antes">lembrete enviado</span><span class="demo__depois">Pix recebido</span></i></li>
+              <li data-em="600" data-troca="2500"><span>João P.</span><b>R$ 320</b><i><span class="demo__antes">lembrete enviado</span><span class="demo__depois">Pix recebido</span></i></li>
+              <li data-em="900"><span>Renata S.</span><b>R$ 95</b><i>vence amanhã</i></li>
+              <li class="demo__atraso" data-em="1200" data-troca="3300"><span>Marcos T.</span><b>R$ 450</b><i><span class="demo__antes">7 dias em atraso</span><span class="demo__depois">passou para você</span></i></li>
+            </ul>
+            <p class="demo__total" data-em="3900">Recebido em dia este mês<b data-conta="12480" data-moeda>R$ 12.480</b></p>
+          </div>
+          <small class="demo__nota">Nomes e valores de exemplo</small>
+        </div>
+        <!-- /demo -->
       </article>
       <article class="servico">
-        <div>
+        <div class="servico__cabeca">
           <h3>Painéis de gestão</h3>
           <p class="servico__promessa">Os números da empresa na sua mão, sem ninguém montar planilha.</p>
         </div>
-        <div>
+        <div class="servico__detalhe">
           <ul class="marcas">
             <li>Vendas, caixa, estoque e contas a pagar numa tela só</li>
             <li>Você vê o problema quando ele começa, com tempo de agir</li>
@@ -215,13 +258,31 @@
           <p class="servico__pratica"><b>Na prática:</b> painel no computador e no celular, ligado aos sistemas que você já usa.</p>
           <div class="servico__links"><a class="servico__botao" href="#contato" data-interesse="Painel de gestão">Quero um painel da minha empresa</a><a href="servicos/paineis-de-gestao/">Ver como funciona</a></div>
         </div>
+        <!-- demo:paineis-de-gestao (gerada por scripts/gerar-paginas-site.mjs) -->
+        <div class="demo" data-demo aria-hidden="true">
+          <p class="demo__topo">Painel da empresa<span>hoje, 9h</span></p>
+          <div class="demo__corpo">
+            <div class="demo__kpis">
+              <p data-em="300"><b data-conta="4870" data-moeda>R$ 4.870</b><span>vendas hoje</span></p>
+              <p data-em="500"><b data-conta="23">23</b><span>pedidos</span></p>
+              <p data-em="700"><b data-conta="2">2</b><span>esperam você</span></p>
+            </div>
+            <div class="demo__barras" data-em="1200">
+              <i style="--h:46%;--i:0"></i><i style="--h:62%;--i:1"></i><i style="--h:38%;--i:2"></i><i style="--h:70%;--i:3"></i><i style="--h:84%;--i:4"></i><i style="--h:58%;--i:5"></i><i style="--h:92%;--i:6"></i>
+            </div>
+            <p class="demo__dias"><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span><span>hoje</span></p>
+            <p class="demo__alerta" data-em="2800">Estoque: 3 produtos acabam essa semana.</p>
+          </div>
+          <small class="demo__nota">Números de exemplo</small>
+        </div>
+        <!-- /demo -->
       </article>
       <article class="servico">
-        <div>
+        <div class="servico__cabeca">
           <h3>Software sob medida</h3>
           <p class="servico__promessa">Um sistema feito do jeito que a sua empresa trabalha.</p>
         </div>
-        <div>
+        <div class="servico__detalhe">
           <ul class="marcas">
             <li>Tudo num lugar só, no lugar de planilha, papel e memória</li>
             <li>O jeito que só a sua empresa trabalha vira vantagem sobre a concorrência</li>
@@ -230,13 +291,28 @@
           <p class="servico__pratica"><b>Na prática:</b> pedidos, estoque, agenda e financeiro, do jeito que você trabalha.</p>
           <div class="servico__links"><a class="servico__botao" href="#contato" data-interesse="Software sob medida">Quero um sistema para a minha empresa</a><a href="servicos/software-sob-medida/">Ver como funciona</a></div>
         </div>
+        <!-- demo:software-sob-medida (gerada por scripts/gerar-paginas-site.mjs) -->
+        <div class="demo" data-demo aria-hidden="true">
+          <p class="demo__topo">Pedidos<span>do jeito que você trabalha</span></p>
+          <div class="demo__corpo">
+            <div class="demo__quadro">
+              <div class="demo__coluna"><small>Novos</small><p class="demo__ficha">Bolo 2 kg<span>sex, 10h</span></p></div>
+              <div class="demo__coluna"><small>Produzindo</small><p class="demo__ficha">Salgados<span>sáb, 9h</span></p></div>
+              <div class="demo__coluna"><small>Prontos</small><p class="demo__ficha">Torta<span>hoje, 16h</span></p></div>
+              <p class="demo__ficha demo__mover" data-troca="1400,3000">Kit festa<span>dom, 12h</span></p>
+            </div>
+            <p class="demo__selo" data-em="3900">Cliente avisado: o pedido está pronto</p>
+          </div>
+          <small class="demo__nota">Exemplo</small>
+        </div>
+        <!-- /demo -->
       </article>
       <article class="servico">
-        <div>
+        <div class="servico__cabeca">
           <h3>Sites sob medida</h3>
           <p class="servico__promessa">Um site que transforma visita em pedido de orçamento.</p>
         </div>
-        <div>
+        <div class="servico__detalhe">
           <ul class="marcas">
             <li>Passa confiança antes da primeira conversa</li>
             <li>Rápido no celular e preparado para aparecer no Google</li>
@@ -245,6 +321,26 @@
           <p class="servico__pratica"><b>Na prática:</b> site da empresa, página de vendas ou loja online, sem cara de modelo pronto.</p>
           <div class="servico__links"><a class="servico__botao" href="#contato" data-interesse="Site sob medida">Quero um site que traga cliente</a><a href="servicos/sites-sob-medida/">Ver como funciona</a></div>
         </div>
+        <!-- demo:sites-sob-medida (gerada por scripts/gerar-paginas-site.mjs) -->
+        <div class="demo" data-demo aria-hidden="true">
+          <p class="demo__topo">Visita pelo celular<span>12:20</span></p>
+          <div class="demo__corpo">
+            <div class="demo__navegador">
+              <p class="demo__barra"><i></i><i></i><i></i><span>suaempresa.com.br</span></p>
+              <div class="demo__pagina">
+                <strong>Sua empresa</strong>
+                <span class="demo__linha" style="width:88%"></span>
+                <span class="demo__linha" style="width:64%"></span>
+                <span class="demo__fotos"><i></i><i></i><i></i></span>
+                <span class="demo__botao" data-troca="2300">Pedir orçamento</span>
+                <i class="demo__cursor" data-troca="900,2200"></i>
+              </div>
+            </div>
+            <div class="demo__notif" data-em="3000"><small>WhatsApp<span>agora</span></small><strong>Novo pedido de orçamento pelo site</strong></div>
+          </div>
+          <small class="demo__nota">Exemplo</small>
+        </div>
+        <!-- /demo -->
       </article>
       <div class="oferta__fim">
         <p>Se ainda não sabe por onde começar, em 20 minutos a gente descobre o que traz mais retorno primeiro. Veja como fica para <a href="para/clinicas/">clínicas</a>, <a href="para/conveniencias/">conveniências</a>, <a href="para/imobiliarias/">imobiliárias</a>, <a href="para/escolas-e-cursos/">escolas</a>, <a href="para/oficinas/">oficinas</a> e <a href="para/restaurantes/">restaurantes</a>.</p>
@@ -406,5 +502,6 @@
   <script src="assets/js/site.js" defer></script>
   <script src="assets/js/ao-vivo.js" defer></script>
   <script src="assets/js/materia.js" defer></script>
+  <script src="assets/js/demos.js" defer></script>
 </body>
 </html>
