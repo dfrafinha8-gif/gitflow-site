@@ -24,14 +24,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500&family=Saira:wdth,wght@125,500;125,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/site.css?v=23e61c0a9c">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="nav" data-nav>
-    <a class="nav__marca" href="#topo">GitFlow Automations</a>
+    <a class="nav__marca" href="#equipe">GitFlow Automations</a>
     <nav aria-label="Principal">
       <a href="#equipe">A equipe</a>
       <a href="#o-que-fazemos">O que fazemos</a>
@@ -43,7 +43,27 @@
   </header>
 
   <main id="conteudo">
-    <section class="trilho" id="topo" data-tema="escuro" data-trilho>
+    <section class="equipe" id="equipe" data-tema="escuro" data-equipe aria-labelledby="titulo-equipe">
+      <div class="equipe__topo">
+        <h1 id="titulo-equipe">Seis robôs para atender, cobrar e organizar a sua empresa.</h1>
+        <div>
+          <p>Agentes de IA, automações, cobrança automática, painéis de gestão, software e sites sob medida. Passe o mouse em cada robô para ver o que ele faz.</p>
+          <div class="abre__botoes">
+            <a class="botao" href="#contato">Quero meu diagnóstico gratuito</a>
+            <a class="botao botao--linha" href="#ao-vivo">Testar o agente agora</a>
+          </div>
+        </div>
+      </div>
+      <div class="equipe__palco" data-equipe-palco>
+        <img class="equipe__poster" src="assets/img/equipe.webp" width="1600" height="640" alt="" fetchpriority="high" decoding="async">
+        <div class="equipe__hud" data-equipe-hud aria-hidden="true"><i></i><i></i><i></i><i></i><span class="equipe__varredura"></span><p data-hud-topo></p><p data-hud-base></p></div>
+      </div>
+      <div class="equipe__nomes" data-equipe-nomes role="group" aria-label="Escolha um robô"></div>
+      <div class="equipe__ficha" data-equipe-ficha aria-live="polite"></div>
+      <p class="equipe__aviso">Os robôs são o jeito da gente mostrar cada serviço. Na sua empresa, eles são software: trabalham no seu WhatsApp, no seu sistema e no seu site.</p>
+    </section>
+
+    <section class="trilho" id="historia" data-tema="escuro" data-trilho>
       <div class="palco" data-palco>
         <div class="palco__sol" data-sol aria-hidden="true"></div>
         <div class="palco__ouro" data-ouro aria-hidden="true"></div>
@@ -51,7 +71,7 @@
         <img class="palco__logo" src="assets/img/simbolo.svg" alt="" width="460" height="460" hidden data-logo>
 
         <div class="abre" data-abre>
-          <h1>Seu cliente chamou às 22h. <b>Quem respondeu?</b></h1>
+          <h2>Seu cliente chamou às 22h. <b>Quem respondeu?</b></h2>
           <p>Agentes de IA, automações, cobrança automática, painéis de gestão, software e sites sob medida. Para atender na hora, receber em dia e decidir com número real.</p>
           <div class="abre__botoes">
             <a class="botao" href="#contato">Quero meu diagnóstico gratuito</a>
@@ -152,17 +172,33 @@
       </div>
     </section>
 
-    <section class="equipe" id="equipe" data-tema="escuro" data-equipe aria-labelledby="titulo-equipe">
-      <div class="equipe__topo">
-        <h2 id="titulo-equipe">Conheça a equipe.</h2>
-        <p>Seis robôs que a gente constrói e coloca para trabalhar na sua empresa. Passe o mouse ou toque em cada um para ver o que ele faz.</p>
+    <section class="antes" id="antes-e-depois" data-tema="escuro" data-antes>
+      <div class="antes__topo">
+        <h2>Arraste e compare.</h2>
+        <p>De um lado, o dia de hoje. Do outro, o mesmo dia com a GitFlow trabalhando junto.</p>
       </div>
-      <div class="equipe__palco" data-equipe-palco>
-        <img class="equipe__poster" src="assets/img/equipe.webp" width="1600" height="640" alt="" loading="lazy" decoding="async">
+      <div class="antes__quadro" data-antes-quadro>
+        <div class="antes__lado antes__lado--hoje">
+          <p class="antes__rotulo">Hoje</p>
+          <ul>
+            <li><b>Mensagem das 22h</b><span>Fica para amanhã, se alguém lembrar.</span></li>
+            <li><b>Orçamento enviado</b><span>Ninguém dá retorno e a venda esfria.</span></li>
+            <li><b>Dia do vencimento</b><span>Você cobra na mão, sem graça.</span></li>
+            <li><b>Fim do mês</b><span>Planilha para montar e número para caçar.</span></li>
+          </ul>
+        </div>
+        <div class="antes__lado antes__lado--com">
+          <p class="antes__rotulo">Com a GitFlow</p>
+          <ul>
+            <li><b>Mensagem das 22h</b><span>Respondida na hora, com horário marcado.</span></li>
+            <li><b>Orçamento enviado</b><span>Retorno automático no dia certo.</span></li>
+            <li><b>Dia do vencimento</b><span>Lembrete educado com Pix, e baixa quando paga.</span></li>
+            <li><b>Fim do mês</b><span>Painel pronto, com o que precisa de você.</span></li>
+          </ul>
+        </div>
+        <div class="antes__laser" aria-hidden="true"><span></span></div>
+        <input class="antes__controle" type="range" min="0" max="100" value="50" data-antes-controle aria-label="Arraste para comparar o dia de hoje com o dia com a GitFlow">
       </div>
-      <div class="equipe__nomes" data-equipe-nomes role="group" aria-label="Escolha um robô"></div>
-      <div class="equipe__ficha" data-equipe-ficha aria-live="polite"></div>
-      <p class="equipe__aviso">Os robôs são o jeito da gente mostrar cada serviço. Na sua empresa, eles são software: trabalham no seu WhatsApp, no seu sistema e no seu site.</p>
     </section>
 
     <section class="oferta" id="o-que-fazemos" data-tema="papel">
@@ -522,11 +558,12 @@
 
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
-  <script src="assets/js/comum.js" defer></script>
-  <script src="assets/js/site.js" defer></script>
-  <script src="assets/js/ao-vivo.js" defer></script>
-  <script src="assets/js/materia.js" defer></script>
-  <script src="assets/js/demos.js" defer></script>
-  <script src="assets/js/equipe.js" type="module"></script>
+  <script src="assets/js/comum.js?v=9605746c2d" defer></script>
+  <script src="assets/js/site.js?v=eef541e878" defer></script>
+  <script src="assets/js/ao-vivo.js?v=f2100248e8" defer></script>
+  <script src="assets/js/materia.js?v=8a1abeb7b6" defer></script>
+  <script src="assets/js/demos.js?v=25cef8f12f" defer></script>
+  <script src="assets/js/equipe.js?v=e35f49f1f3" type="module"></script>
+  <script src="assets/js/futuro.js?v=eed7cadec0" defer></script>
 </body>
 </html>
