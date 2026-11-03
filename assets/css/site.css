@@ -280,8 +280,15 @@ html:not(.js) .demo__cursor { display: none; }
 .projetos { background: var(--fundo); padding: clamp(70px, 10vw, 150px) var(--borda); }
 .projetos__topo { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(20px, 4vw, 70px); align-items: end; margin-bottom: clamp(30px, 5vw, 70px); }
 .projetos__topo p { font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--prata); }
-.obras { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(26px, 3vw, 44px) clamp(16px, 2vw, 28px); }
-.obra { display: flex; flex-direction: column; border-top: 2px solid var(--ouro); padding-top: clamp(18px, 2.4vw, 30px); }
+.obras { display: grid; grid-template-columns: 1fr; gap: clamp(44px, 6vw, 96px); }
+.obra, .obra__texto { display: flex; flex-direction: column; }
+.obra { border-top: 2px solid var(--ouro); padding-top: clamp(18px, 2.4vw, 30px); }
+.obra.obra--tela { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr); gap: clamp(24px, 4vw, 72px); align-items: center; }
+.obra.obra--tela:nth-child(even) { grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); }
+.obra--tela:nth-child(even) .obra__tela { order: -1; }
+.obra__tela { margin: 0; }
+.obra__tela img { width: 100%; height: auto; }
+.projetos__aviso { margin-top: 22px; font-size: .85rem; color: var(--apagado); }
 .obra small { order: 2; margin-top: 8px; font-size: .9rem; color: var(--bronze); }
 .obra h3 { font-size: clamp(1.6rem, 3.4vw, 3.4rem); }
 .obra p { order: 3; }
@@ -407,6 +414,8 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
   .demo { min-height: 0; }
   .fluxo li { gap: 8px; }
   .obras { grid-template-columns: 1fr; }
+  .obra.obra--tela, .obra.obra--tela:nth-child(even) { grid-template-columns: 1fr; }
+  .obra--tela:nth-child(even) .obra__tela { order: 0; }
   .custo__conta strong { font-size: clamp(3rem, 15vw, 5rem); }
   body { padding-bottom: 58px; }
   .fixo { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: var(--ouro); color: var(--tinta); border-top: 1px solid var(--tinta); padding: 16px; text-align: center; font-weight: 500; text-decoration: none; transition: transform .3s var(--mola); }
