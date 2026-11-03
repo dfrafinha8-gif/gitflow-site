@@ -288,7 +288,8 @@
   function quadro(t) {
     if (!visivel) return;
     const fim = trilho.offsetHeight - innerHeight;
-    const prog = Math.min(1, Math.max(0, scrollY / fim));
+    // a história não é mais a primeira seção: conta a rolagem a partir de onde ela começa
+    const prog = Math.min(1, Math.max(0, (scrollY - trilho.offsetTop) / fim));
     const alvo = plato(Math.min(prog * 7.2, 7));
     atual += (alvo - atual) * (quieto ? 1 : .08);
     const s = atual;

@@ -79,6 +79,12 @@ if (secao) {
     const contra = new THREE.DirectionalLight(0x9FB4D0, 1.1); contra.position.set(-5, 4, -6); cena.add(contra);
     // luz de palco que acende sobre o centro quando alguém chega lá
     const foco = new THREE.SpotLight(0xFFE2B0, 0, 14, 0.42, 0.6, 1.2); foco.position.set(0, 8, 4); cena.add(foco, foco.target);
+    // anéis de luz no chão, embaixo de quem está no centro: um inteiro e um tracejado girando ao contrário
+    const anel = new THREE.Group(); anel.rotation.x = -Math.PI / 2; anel.position.y = 0.02; cena.add(anel);
+    const anelMat = new THREE.MeshBasicMaterial({ color: 0xD4BC80, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false });
+    anel.add(new THREE.Mesh(new THREE.RingGeometry(1.02, 1.07, 72), anelMat));
+    const tracos = new THREE.Group(); anel.add(tracos);
+    for (let i = 0; i < 12; i++) tracos.add(new THREE.Mesh(new THREE.RingGeometry(1.22, 1.26, 8, 1, (i / 12) * Math.PI * 2, Math.PI / 14), anelMat));
 
     const metal = (cor, rug) => new THREE.MeshStandardMaterial({ color: cor, metalness: 1, roughness: rug });
     const luz = (cor, i) => new THREE.MeshStandardMaterial({ color: 0x111111, emissive: cor, emissiveIntensity: i });
@@ -199,11 +205,11 @@ if (secao) {
       if (!emCelular) {
         const passo = 2.15;
         robos.forEach((r, i) => { const x = (i - 2.5) * passo; r.base.set(x, 0, -Math.abs(x) * 0.18); });
-        centro.set(-1.3, 0, 3.2); recuo = 3.6;
-        camZ = Math.max((2.5 * passo + 1.1) / tanH, 3.2 / tanV); camY = 2.2; olharY = 1.45;
+        centro.set(-1.3, 0, 2.2); recuo = 3.6;
+        camZ = Math.max((2.5 * passo + 1.1) / tanH, 2.8 / tanV); camY = 2.2; olharY = 1.45;
       } else {
         robos.forEach((r, i) => { const col = i % 3, lin = Math.floor(i / 3); r.base.set((col - 1) * 1.75, lin ? 0 : 3.25, lin ? 0.4 : -0.4); });
-        centro.set(0, 0, 2.6); recuo = 2.6;
+        centro.set(0, 0, 1.2); recuo = 2.6;
         camZ = Math.max(2.85 / tanH, 3.6 / tanV); camY = 3.3; olharY = 2.75;
       }
       robos.forEach((r) => { if (!r.iniciado) { r.pos.copy(r.base); r.iniciado = true; } });
@@ -217,8 +223,10 @@ if (secao) {
     // um passo para trás no próprio lugar (assim ninguém atravessa ninguém no caminho)
     let chegou = false, chegouEm = 0;
     estado.tem3D = true;
+    const hud = secao.querySelector('[data-equipe-hud]');
     estado.aoEscolher = () => {
       chegou = false;
+      if (hud) hud.dataset.ligado = 'false';
       if (!celular()) fichaEl.dataset.aberta = 'false';
       pedir();
     };
@@ -241,24 +249,26 @@ if (secao) {
       const a = raio.intersectObjects(robos.map((x) => x.alvo))[0];
       return a ? robos.findIndex((x) => x.alvo === a.object) : null;
     }
-    renderer.domElement.addEventListener('pointermove', (e) => {
+    palco.addEventListener('pointermove', (e) => {
       pedir();
       if (estado.fixado || e.pointerType !== 'mouse') return;
       const i = acertar(e);
       if (i !== candidato) { candidato = i; candidatoDesde = performance.now(); }
     });
-    renderer.domElement.addEventListener('pointerleave', () => { candidato = null; });
-    renderer.domElement.addEventListener('pointerdown', (e) => {
+    palco.addEventListener('pointerleave', () => { candidato = null; });
+    palco.addEventListener('pointerdown', (e) => {
       const i = acertar(e);
       if (i !== null) { estado.fixado = e.pointerType !== 'mouse'; escolher(i); }
     });
 
     const v = new THREE.Vector3(), d = new THREE.Vector3();
+    let hudLado = 120;
     function posicionarFicha() {
       if (estado.escolhido === null || emCelular || celular()) return;
       v.set(centro.x, 2.4, centro.z).project(camera);
       const x = (v.x + 1) / 2 * largura, y = (1 - v.y) / 2 * altura, w = fichaEl.offsetWidth;
-      fichaEl.style.left = `${palco.offsetLeft + Math.min(largura - w, x + 150)}px`;
+      // a ficha fica do lado de fora da mira do HUD
+      fichaEl.style.left = `${palco.offsetLeft + Math.min(largura - w, x + hudLado + 36)}px`;
       fichaEl.style.top = `${palco.offsetTop + Math.max(0, Math.min(altura - fichaEl.offsetHeight, y - 60))}px`;
     }
     const angulo = (a, b) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
@@ -295,7 +305,7 @@ if (secao) {
         r.g.position.copy(r.pos);
         // quem está no centro cresce à medida que chega; os do fundo encolhem um pouco
         const perto = escolhidoAgora ? 1 - Math.min(1, r.pos.distanceTo(centro) / 3) : 0;
-        const escala = escolhidoAgora ? 1 + 0.22 * perto : (lider ? 0.92 : 1);
+        const escala = escolhidoAgora ? 1 + 0.12 * perto : (lider ? 0.92 : 1);
         r.g.scale.setScalar(r.g.scale.x + (escala - r.g.scale.x) * suave(6));
 
         // chegada ao centro: pulinho, olhos acendem, a cabeça escaneia
@@ -369,12 +379,32 @@ if (secao) {
       olharX += ((temLider && !emCelular ? centro.x * 0.35 : 0) - olharX) * suave(3);
       camera.lookAt(olharX, olharY - (temLider ? 0.15 : 0), 0);
 
+      // anéis e mira (HUD) em volta de quem chegou ao centro
+      anelMat.opacity += ((lider && chegou ? 0.85 : 0) - anelMat.opacity) * suave(5);
+      if (lider) { anel.position.x = lider.pos.x; anel.position.z = lider.pos.z; anel.scale.setScalar(lider.g.scale.x); }
+      tracos.rotation.z -= dt * 0.6 * mov;
+      if (hud) {
+        if (lider && chegou) {
+          const esc = lider.g.scale.x;
+          v.set(lider.pos.x, 2.95 * esc, lider.pos.z).project(camera); const topo = (1 - v.y) / 2 * altura;
+          v.set(lider.pos.x, -0.05, lider.pos.z).project(camera); const base = (1 - v.y) / 2 * altura, meio = (v.x + 1) / 2 * largura;
+          const lado = (base - topo) * 0.42; hudLado = lado;
+          Object.assign(hud.style, { left: `${meio - lado}px`, top: `${topo}px`, width: `${lado * 2}px`, height: `${base - topo}px` });
+          if (hud.dataset.ligado !== 'true') {
+            const def = lider.def;
+            hud.querySelector('[data-hud-topo]').innerHTML = `<span>${def.codigo} ${def.nome}</span><span>sistema ligado</span>`;
+            hud.querySelector('[data-hud-base]').innerHTML = `<span>${def.servico}</span><span>pronto</span>`;
+            hud.dataset.ligado = 'true';
+          }
+        } else hud.dataset.ligado = 'false';
+      }
+
       // a ficha abre quando ele termina de chegar
       if (lider && chegou && t - chegouEm > 0.35 && fichaEl.dataset.aberta !== 'true') fichaEl.dataset.aberta = 'true';
       posicionarFicha();
       renderer.render(cena, camera);
       secao.classList.add('equipe--3d');
-      if (!quieto || !parado || Math.abs(camera.position.z - zAlvo) > 0.01) pedir();
+      if (!quieto || !parado || Math.abs(camera.position.z - zAlvo) > 0.01 || Math.abs(anelMat.opacity - (lider && chegou ? 0.85 : 0)) > 0.01) pedir();
     }
     pedir();
   }
