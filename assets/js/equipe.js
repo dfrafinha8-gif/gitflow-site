@@ -111,82 +111,205 @@ if (secao) {
       return new THREE.Mesh(new THREE.ExtrudeGeometry(s, { depth: 0.07, bevelEnabled: true, bevelSize: 0.015, bevelThickness: 0.015, bevelSegments: 2 }), mat);
     }
 
+    // Cada robô tem silhueta e jeito de andar próprios (referência: "silhueta primeiro"):
+    // Atendente flutua, Operário anda de esteira, Cobrador tem pernas invertidas, Analista é um drone,
+    // Construtor anda em quatro patas e a Vitrine se equilibra numa bola.
+    const cilindro = (rt, rb, h, mat, seg = 28) => new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat);
+    const toro = (r, tubo, mat, arco = Math.PI * 2) => new THREE.Mesh(new THREE.TorusGeometry(r, tubo, 10, 48, arco), mat);
+    const brilho = (cor, opacidade) => new THREE.MeshBasicMaterial({ color: cor, transparent: true, opacity: opacidade, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
+    const em = (pai, filho, x = 0, y = 0, z = 0) => { filho.position.set(x, y, z); pai.add(filho); return filho; };
+
     function montar(def, destino = cena) {
       const g = new THREE.Group(), corpoMat = M[def.corpo], extra = {};
-      const sombra = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 1.9), new THREE.MeshBasicMaterial({ map: sombraTex, transparent: true, depthWrite: false }));
+      const sombra = new THREE.Mesh(new THREE.PlaneGeometry(2.1, 2.1), new THREE.MeshBasicMaterial({ map: sombraTex, transparent: true, depthWrite: false }));
       sombra.rotation.x = -Math.PI / 2; sombra.position.y = 0.01; g.add(sombra);
-      // o corpo inteiro fica num grupo próprio para subir e descer a cada passo sem levar a sombra junto
+      // o corpo inteiro fica num grupo próprio para subir e descer sem levar a sombra junto
       const boneco = new THREE.Group(); g.add(boneco);
-      const pernas = [-0.24, 0.24].map((x) => {
-        const quadril = new THREE.Group(); quadril.position.set(x, 0.66, 0); boneco.add(quadril);
-        const perna = capsula(0.1, 0.32, M.grafite); perna.position.y = -0.24; quadril.add(perna);
-        const pe = caixa(0.32, 0.16, 0.44, 0.07, M.grafite); pe.position.set(0, -0.58, 0.04); quadril.add(pe);
-        return quadril;
-      });
-      const tronco = new THREE.Group(); tronco.position.y = 1.15; boneco.add(tronco);
-      tronco.add(caixa(1.1, 1.05, 0.78, 0.24, corpoMat));
-      const peito = caixa(0.62, 0.42, 0.06, 0.05, M.visor); peito.position.set(0, 0.06, 0.4); tronco.add(peito);
-      const bracos = [-1, 1].map((lado) => {
-        const ombro = new THREE.Group(); ombro.position.set(lado * 0.67, 0.32, 0); ombro.rotation.z = lado * 0.12; tronco.add(ombro);
-        const b = capsula(0.11, 0.5, M.grafite); b.position.y = -0.34; ombro.add(b);
-        const mao = esfera(0.14, corpoMat); mao.position.y = -0.7; ombro.add(mao);
-        return ombro;
-      });
-      const cabeca = new THREE.Group(); cabeca.position.y = 2.06; boneco.add(cabeca);
-      let olhos, olhoMat;
-      if (def.tipo === 'site') {
-        cabeca.add(caixa(1.2, 0.86, 0.14, 0.08, M.grafite));
-        const tela = caixa(1.08, 0.62, 0.04, 0.03, M.papel); tela.position.set(0, -0.06, 0.07); cabeca.add(tela);
-        [-0.44, -0.36, -0.28].forEach((x) => { const d = esfera(0.025, M.luzBronze); d.position.set(x, 0.33, 0.08); cabeca.add(d); });
-        const olhoEscuro = new THREE.MeshStandardMaterial({ color: 0x0C1016, roughness: 0.4 });
-        olhos = [-0.2, 0.2].map((x) => { const o = capsula(0.05, 0.08, olhoEscuro); o.position.set(x, 0, 0.1); cabeca.add(o); return o; });
-        olhoMat = luz(0xF3DFA2, 1.2);
-        extra.botao = caixa(0.36, 0.1, 0.03, 0.02, olhoMat); extra.botao.position.set(0, -0.24, 0.1); cabeca.add(extra.botao);
-        extra.cursor = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.12, 3), M.grafite); extra.cursor.rotation.z = 0.5; extra.cursor.position.set(0.3, 2.05, 0.2); boneco.add(extra.cursor);
-      } else {
-        cabeca.add(caixa(0.98, 0.74, 0.78, 0.26, corpoMat));
-        const rosto = caixa(0.8, 0.46, 0.06, 0.12, M.visor); rosto.position.set(0, -0.02, 0.38); cabeca.add(rosto);
-        olhoMat = luz(0xF3DFA2, 2.2);
-        olhos = [-0.19, 0.19].map((x) => { const o = capsula(0.055, 0.09, olhoMat); o.position.set(x, 0, 0.42); cabeca.add(o); return o; });
-        const haste = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.28, 8), M.grafite); haste.position.y = 0.5; cabeca.add(haste);
-        extra.ponta = esfera(0.06, luz(0xF3DFA2, 2)); extra.ponta.position.y = 0.67; cabeca.add(extra.ponta);
-      }
+      const cabeca = new THREE.Group(), tronco = new THREE.Group();
+      boneco.add(cabeca, tronco);
+      const olhoMat = luz(0xF3DFA2, 2.4);
+      let olhos = [], pernas = [], rodas = [], bracos = [], locomocao = 'pernas';
+      // braço genérico: um pivô no ombro (os gestos giram o pivô) com o que for pendurado nele
+      const braco = (x, y, z, pendurar) => { const ombro = new THREE.Group(); ombro.position.set(x, y, z); ombro.rotation.z = Math.sign(x) * 0.12; boneco.add(ombro); pendurar(ombro); return ombro; };
+
       if (def.tipo === 'agente') {
-        const arco = new THREE.Mesh(new THREE.TorusGeometry(0.53, 0.035, 8, 28, Math.PI), M.grafite); arco.position.y = 0.06; cabeca.add(arco);
-        [-1, 1].forEach((l) => { const f = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.1, 20), M.ouro); f.rotation.z = Math.PI / 2; f.position.set(l * 0.53, 0.02, 0); cabeca.add(f); });
-        const microfone = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.42, 6), M.grafite); microfone.rotation.z = Math.PI / 2.6; microfone.position.set(0.38, -0.2, 0.3); cabeca.add(microfone);
-        const mic = esfera(0.045, luz(0xF3DFA2, 2)); mic.position.set(0.2, -0.27, 0.43); cabeca.add(mic);
-        extra.balao = new THREE.Group(); extra.balao.position.set(0.8, 2.9, 0.2); extra.balao.scale.setScalar(0.001);
+        // androide que flutua: corpo de ovo, faixa de luz no rosto, auréola girando e mãos soltas no ar
+        locomocao = 'flutua';
+        const corpo = em(boneco, new THREE.Mesh(new THREE.SphereGeometry(0.62, 40, 28), corpoMat), 0, 1.4, 0); corpo.scale.set(1, 1.25, 0.9);
+        em(boneco, caixa(0.46, 0.26, 0.05, 0.05, M.visor), 0, 1.55, 0.53);
+        [-0.12, 0, 0.12].forEach((x) => em(boneco, esfera(0.035, olhoMat), x, 1.55, 0.57));
+        em(boneco, cilindro(0.34, 0.12, 0.34, M.grafite), 0, 0.66, 0);
+        em(boneco, toro(0.3, 0.035, luz(0xF3DFA2, 2)), 0, 0.5, 0).rotation.x = Math.PI / 2;
+        extra.jato = em(boneco, new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.36, 28, 1, true), brilho(0xF3DFA2, 0.16)), 0, 0.3, 0);
+        extra.jato.rotation.x = Math.PI;
+        cabeca.position.set(0, 2.42, 0);
+        const cupula = em(cabeca, new THREE.Mesh(new THREE.SphereGeometry(0.46, 40, 28), corpoMat)); cupula.scale.set(1, 0.88, 0.95);
+        const faixa = em(cabeca, new THREE.Mesh(new THREE.CylinderGeometry(0.455, 0.455, 0.12, 40, 1, true, -1.25, 2.5), olhoMat), 0, -0.02, 0);
+        faixa.scale.z = 0.95; olhos = [faixa];
+        extra.halo = em(cabeca, toro(0.64, 0.022, M.ouro), 0, 0.3, 0); extra.halo.rotation.x = Math.PI / 2 - 0.25;
+        [-1, 1].forEach((l) => em(cabeca, cilindro(0.09, 0.09, 0.08, M.ouro), l * 0.47, 0, 0).rotation.z = Math.PI / 2);
+        bracos = [-1, 1].map((l) => braco(l * 0.78, 1.65, 0, (o) => { em(o, esfera(0.13, corpoMat), 0, -0.55, 0); em(o, toro(0.1, 0.018, olhoMat), 0, -0.55, 0).rotation.x = Math.PI / 2; }));
+        extra.balao = new THREE.Group(); extra.balao.position.set(0.9, 3.15, 0.2); extra.balao.scale.setScalar(0.001);
         extra.balao.add(caixa(0.62, 0.34, 0.08, 0.12, M.papel));
-        extra.pontos = [-0.15, 0, 0.15].map((x) => { const d = esfera(0.04, M.grafite); d.position.set(x, 0, 0.05); extra.balao.add(d); return d; });
+        extra.pontos = [-0.15, 0, 0.15].map((x) => em(extra.balao, esfera(0.04, M.grafite), x, 0, 0.05));
         boneco.add(extra.balao);
       }
+
       if (def.tipo === 'automacao') {
-        extra.e1 = engrenagem(0.17, 10, M.ouro); extra.e1.position.set(-0.1, 0.06, 0.42); tronco.add(extra.e1);
-        extra.e2 = engrenagem(0.11, 8, M.bronze); extra.e2.position.set(0.15, 0.12, 0.42); tronco.add(extra.e2);
+        // mecha de esteira: baixo e largo, um olho só e um braço de garra
+        locomocao = 'esteira';
+        [-1, 1].forEach((l) => {
+          em(boneco, caixa(0.34, 0.44, 1.18, 0.17, M.grafite), l * 0.5, 0.24, 0);
+          [-0.38, 0, 0.38].forEach((z) => {
+            const roda = em(boneco, new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.08, 20).rotateZ(Math.PI / 2), M.bronze), l * 0.69, 0.24, z);
+            em(roda, new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.26, 0.04), M.grafite));
+            rodas.push(roda);
+          });
+        });
+        em(boneco, caixa(1.2, 0.3, 0.95, 0.08, M.grafite), 0, 0.58, 0);
+        tronco.position.y = 1.12;
+        em(tronco, caixa(1.38, 0.78, 0.92, 0.18, corpoMat));
+        em(tronco, caixa(1.4, 0.07, 0.94, 0.02, M.ouro), 0, -0.3, 0);
+        em(tronco, caixa(0.66, 0.38, 0.05, 0.05, M.visor), 0.18, 0.06, 0.46);
+        extra.e1 = engrenagem(0.15, 10, M.ouro); extra.e1.position.set(0.06, 0.06, 0.47); tronco.add(extra.e1);
+        extra.e2 = engrenagem(0.1, 8, M.bronze); extra.e2.position.set(0.3, 0.12, 0.47); tronco.add(extra.e2);
+        [-1, 1].forEach((l) => em(boneco, cilindro(0.07, 0.07, 0.5, M.grafite, 16), l * 0.48, 1.8, -0.36));
+        cabeca.position.set(0, 1.78, 0.05);
+        em(cabeca, caixa(0.78, 0.4, 0.62, 0.16, corpoMat));
+        em(cabeca, cilindro(0.2, 0.2, 0.1, M.grafite), 0, 0, 0.31).rotation.x = Math.PI / 2;
+        olhos = [em(cabeca, esfera(0.12, olhoMat), 0, 0, 0.35)];
+        extra.ponta = em(cabeca, esfera(0.05, luz(0xE09A5A, 2)), 0.28, 0.24, 0);
+        bracos = [
+          braco(-0.86, 1.36, 0.05, (o) => {
+            em(o, capsula(0.15, 0.42, M.grafite), 0, -0.32, 0);
+            em(o, cilindro(0.17, 0.17, 0.12, corpoMat), 0, -0.68, 0);
+            extra.garra = [-1, 1].map((d) => { const dedo = new THREE.Group(); dedo.position.set(d * 0.08, -0.74, 0); o.add(dedo); em(dedo, caixa(0.07, 0.3, 0.12, 0.03, M.ouro), 0, -0.14, 0); return dedo; });
+          }),
+          braco(0.86, 1.36, 0.05, (o) => { em(o, capsula(0.09, 0.4, M.grafite), 0, -0.3, 0); em(o, esfera(0.12, corpoMat), 0, -0.6, 0); }),
+        ];
       }
+
       if (def.tipo === 'cobranca') {
+        // alto e esguio, pernas invertidas, uma fenda de luz no peito e moedas em órbita
+        locomocao = 'pernas';
+        pernas = [-1, 1].map((l) => {
+          const quadril = new THREE.Group(); quadril.position.set(l * 0.22, 1.26, 0); boneco.add(quadril);
+          em(quadril, capsula(0.085, 0.46, M.grafite), 0, -0.28, -0.12).rotation.x = 0.41;
+          em(quadril, esfera(0.1, corpoMat), 0, -0.55, -0.24);
+          em(quadril, capsula(0.07, 0.42, M.grafite), 0, -0.8, -0.12).rotation.x = -0.45;
+          em(quadril, caixa(0.2, 0.07, 0.34, 0.03, corpoMat), 0, -1.17, 0.06);
+          return quadril;
+        });
+        em(boneco, esfera(0.2, M.grafite), 0, 1.28, 0);
+        tronco.position.y = 1.78;
+        em(tronco, caixa(0.72, 0.92, 0.48, 0.2, corpoMat));
+        extra.fenda = em(tronco, caixa(0.34, 0.05, 0.05, 0.02, luz(0xF3DFA2, 2)), 0, 0.16, 0.25);
+        em(tronco, caixa(0.42, 0.22, 0.04, 0.04, M.visor), 0, -0.12, 0.24);
+        extra.orbita = new THREE.Group(); tronco.add(extra.orbita);
+        [0, 1, 2].forEach((i) => {
+          const a = (i / 3) * Math.PI * 2;
+          const m = em(extra.orbita, cilindro(0.11, 0.11, 0.03, M.ouro), Math.cos(a) * 0.78, Math.sin(a * 2) * 0.12, Math.sin(a) * 0.78);
+          m.rotation.x = Math.PI / 2;
+        });
+        em(boneco, cilindro(0.05, 0.05, 0.26, M.grafite, 12), 0, 2.32, 0);
+        cabeca.position.set(0, 2.55, 0);
+        em(cabeca, caixa(0.86, 0.3, 0.46, 0.13, corpoMat));
+        em(cabeca, caixa(0.7, 0.13, 0.04, 0.04, M.visor), 0, 0, 0.23);
+        olhos = [-0.17, 0.17].map((x) => em(cabeca, caixa(0.15, 0.045, 0.02, 0.01, olhoMat), x, 0, 0.255));
+        bracos = [-1, 1].map((l) => braco(l * 0.44, 2.1, 0, (o) => { em(o, capsula(0.055, 0.6, M.grafite), 0, -0.38, 0); em(o, esfera(0.08, corpoMat), 0, -0.76, 0); }));
         extra.moeda = new THREE.Group();
-        const disco = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.05, 40), M.ouro); disco.rotation.x = Math.PI / 2; extra.moeda.add(disco);
-        const aro = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.012, 6, 32), M.bronze); aro.position.z = 0.03; extra.moeda.add(aro);
-        extra.moeda.position.set(0, -0.95, 0.15); bracos[1].add(extra.moeda);
+        em(extra.moeda, cilindro(0.17, 0.17, 0.04, M.ouro, 36)).rotation.x = Math.PI / 2;
+        em(extra.moeda, toro(0.13, 0.01, M.bronze), 0, 0, 0.025);
+        extra.moeda.position.set(0, -0.92, 0.12); bracos[1].add(extra.moeda);
       }
+
       if (def.tipo === 'painel') {
-        extra.barras = [0.5, 0.8, 0.6, 1].map((h, i) => { const b = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.3, 0.02), i === 3 ? luz(0xF3DFA2, 2.2) : M.luzBronze); b.position.set(-0.18 + i * 0.12, -0.08, 0.44); b.userData.h = h; tronco.add(b); return b; });
+        // drone sentinela: esfera que flutua, um olho grande que se mexe e painéis de holograma em volta
+        locomocao = 'flutua';
+        const centro = 1.75;
+        em(boneco, new THREE.Mesh(new THREE.SphereGeometry(0.6, 44, 30), corpoMat), 0, centro, 0);
+        em(boneco, toro(0.62, 0.04, M.grafite), 0, centro, 0).rotation.x = Math.PI / 2;
+        extra.rotores = [0, 1, 2, 3].map((i) => {
+          const a = Math.PI / 4 + (i * Math.PI) / 2, x = Math.cos(a) * 0.95, z = Math.sin(a) * 0.95;
+          const haste = em(boneco, new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.05), M.grafite), Math.cos(a) * 0.72, centro - 0.05, Math.sin(a) * 0.72); haste.rotation.y = -a;
+          em(boneco, cilindro(0.05, 0.05, 0.08, M.grafite, 12), x, centro - 0.02, z);
+          const helice = em(boneco, new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.012, 0.05), M.prata), x, centro + 0.03, z);
+          return helice;
+        });
+        extra.jato = em(boneco, new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.32, 24, 1, true), brilho(0xB8C2CE, 0.12)), 0, centro - 0.78, 0); extra.jato.rotation.x = Math.PI;
+        cabeca.position.set(0, centro, 0);
+        em(cabeca, toro(0.29, 0.035, M.ouro), 0, 0, 0.55);
+        em(cabeca, cilindro(0.27, 0.27, 0.06, M.visor), 0, 0, 0.53).rotation.x = Math.PI / 2;
+        olhos = [em(cabeca, esfera(0.15, olhoMat), 0, 0, 0.54)];
+        extra.holos = new THREE.Group(); extra.holos.position.y = centro + 0.15; boneco.add(extra.holos);
+        extra.holoMat = brilho(0xD4BC80, 0.14);
+        extra.barras = [];
+        [-0.9, 0.9].forEach((a, i) => {
+          const painel = new THREE.Group(); painel.position.set(Math.sin(a) * 1.15, i ? 0.35 : 0.1, Math.cos(a) * 0.55); painel.rotation.y = a * 0.7; extra.holos.add(painel);
+          em(painel, new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.44), extra.holoMat));
+          em(painel, new THREE.Mesh(new THREE.PlaneGeometry(0.64, 0.012), brilho(0xF3DFA2, 0.7)), 0, 0.22, 0.001);
+          [0.5, 0.8, 0.6, 1].forEach((h, j) => { const b = em(painel, new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.3, 0.01), brilho(j === 3 ? 0xF3DFA2 : 0xE09A5A, 0.85)), -0.2 + j * 0.13, -0.08, 0.01); b.userData.h = h; b.userData.base = -0.2; extra.barras.push(b); });
+        });
+        bracos = [-1, 1].map((l) => braco(l * 0.5, centro - 0.35, 0.1, (o) => { em(o, capsula(0.04, 0.22, M.grafite), 0, -0.16, 0); em(o, esfera(0.06, corpoMat), 0, -0.32, 0); }));
       }
+
       if (def.tipo === 'software') {
-        // os blocos andam junto com ele: ficam no grupo do corpo, ao lado do pé direito
+        // quatro patas de aranha, cabine de seis lados, três olhos e dois braços que montam os blocos
+        locomocao = 'patas';
+        tronco.position.y = 1.15;
+        em(tronco, cilindro(0.6, 0.66, 0.46, corpoMat, 6));
+        em(tronco, cilindro(0.5, 0.6, 0.12, M.grafite, 6), 0, 0.29, 0);
+        pernas = [45, 135, 225, 315].map((graus, i) => {
+          const a = THREE.MathUtils.degToRad(graus);
+          const raiz = new THREE.Group(); raiz.position.set(Math.cos(a) * 0.5, 1.1, Math.sin(a) * 0.5); raiz.rotation.y = -a; boneco.add(raiz);
+          em(raiz, esfera(0.09, M.grafite));
+          em(raiz, capsula(0.06, 0.5, M.grafite), 0.26, 0.2, 0).rotation.z = -1.0;
+          em(raiz, esfera(0.08, corpoMat), 0.52, 0.42, 0);
+          em(raiz, capsula(0.05, 0.9, M.grafite), 0.68, -0.28, 0).rotation.z = 0.25;
+          em(raiz, cilindro(0.04, 0.09, 0.1, corpoMat, 12), 0.79, -1.05, 0);
+          raiz.userData.y = 1.1; raiz.userData.fase = i % 2 ? Math.PI : 0;
+          return raiz;
+        });
+        cabeca.position.set(0, 1.42, 0.42);
+        const cupula = em(cabeca, new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 20, 0, Math.PI * 2, 0, Math.PI / 2), M.visor)); cupula.rotation.x = Math.PI / 2; cupula.scale.set(1, 1, 0.8);
+        olhos = [[-0.11, 0.05], [0.11, 0.05], [0, -0.08]].map(([x, y]) => em(cabeca, esfera(0.05, olhoMat), x, y, 0.24));
+        em(boneco, cilindro(0.025, 0.025, 0.9, M.grafite, 8), -0.25, 1.85, -0.3).rotation.z = 0.2;
+        extra.ponta = em(boneco, esfera(0.06, luz(0xF3DFA2, 2)), -0.34, 2.3, -0.3);
+        bracos = [-1, 1].map((l) => braco(l * 0.3, 1.1, 0.5, (o) => { o.rotation.x = -0.5; em(o, capsula(0.045, 0.4, M.grafite), 0, -0.26, 0.05); [-1, 1].forEach((d) => em(o, caixa(0.03, 0.14, 0.05, 0.01, M.ouro), d * 0.04, -0.55, 0.05)); }));
         extra.blocos = [M.ouro, M.prata, M.bronze].map((m, i) => {
           const c = caixa(0.26, 0.26, 0.26, 0.04, m);
-          c.userData.solto = new THREE.Vector3(0.95 + (i - 1) * 0.3, 0.13, 0.35 + (i % 2) * 0.15);
-          c.userData.pilha = new THREE.Vector3(0.95, 0.13 + i * 0.27, 0.3);
+          c.userData.solto = new THREE.Vector3((i - 1) * 0.36, 0.13, 1.25 + (i % 2) * 0.12);
+          c.userData.pilha = new THREE.Vector3(0, 0.13 + i * 0.27, 1.2);
           c.position.copy(c.userData.solto); c.rotation.y = i * 0.6; g.add(c); return c;
         });
       }
-      const alvo = new THREE.Mesh(new THREE.BoxGeometry(1.5, 3, 1.2), new THREE.MeshBasicMaterial({ visible: false })); alvo.position.y = 1.4; g.add(alvo);
+
+      if (def.tipo === 'site') {
+        // equilibrista numa bola, pescoço comprido e a cabeça é uma tela de navegador
+        locomocao = 'roda';
+        const bola = em(boneco, new THREE.Mesh(new THREE.SphereGeometry(0.34, 32, 22), M.grafite), 0, 0.34, 0);
+        em(bola, toro(0.345, 0.025, M.ouro)).rotation.y = Math.PI / 2;
+        rodas = [bola];
+        em(boneco, cilindro(0.34, 0.24, 0.16, M.grafite), 0, 0.72, 0);
+        tronco.position.y = 1.2;
+        em(tronco, cilindro(0.3, 0.44, 0.8, corpoMat));
+        em(tronco, toro(0.33, 0.03, olhoMat), 0, 0.22, 0).rotation.x = Math.PI / 2;
+        em(boneco, cilindro(0.05, 0.05, 0.62, M.grafite, 12), 0, 1.9, 0);
+        cabeca.position.set(0, 2.38, 0);
+        em(cabeca, caixa(1.2, 0.86, 0.14, 0.08, M.grafite));
+        em(cabeca, caixa(1.08, 0.62, 0.04, 0.03, M.papel), 0, -0.06, 0.07);
+        [-0.44, -0.36, -0.28].forEach((x) => em(cabeca, esfera(0.025, M.luzBronze), x, 0.33, 0.08));
+        const olhoEscuro = new THREE.MeshStandardMaterial({ color: 0x0C1016, roughness: 0.4 });
+        olhos = [-0.2, 0.2].map((x) => em(cabeca, capsula(0.05, 0.08, olhoEscuro), x, 0, 0.1));
+        extra.botao = em(cabeca, caixa(0.36, 0.1, 0.03, 0.02, luz(0xF3DFA2, 1.2)), 0, -0.24, 0.1);
+        extra.cursor = em(boneco, new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.12, 3), M.grafite), 0.3, 2.37, 0.2); extra.cursor.rotation.z = 0.5;
+        bracos = [-1, 1].map((l) => braco(l * 0.42, 1.48, 0, (o) => { em(o, capsula(0.05, 0.5, M.grafite), 0, -0.32, 0); em(o, esfera(0.08, corpoMat), 0, -0.64, 0); }));
+      }
+
+      const alvo = new THREE.Mesh(new THREE.BoxGeometry(1.6, 3, 1.3), new THREE.MeshBasicMaterial({ visible: false })); alvo.position.y = 1.4; g.add(alvo);
       destino.add(g);
       return {
-        def, g, boneco, cabeca, bracos, pernas, olhos, olhoMat, brilho: olhoMat.emissiveIntensity, extra, alvo,
+        def, g, boneco, cabeca, bracos, pernas, rodas, locomocao, olhos, olhoMat, brilho: olhoMat.emissiveIntensity, extra, alvo,
         base: new THREE.Vector3(), pos: new THREE.Vector3(), destino: new THREE.Vector3(),
         rot: 0, passo: 0, andar: 0, k: 0, ativa: 0, fase: Math.random() * 6, piscar: 2 + Math.random() * 4,
       };
@@ -283,28 +406,68 @@ if (secao) {
     function gesto(r, k, a, t, dt, mov, suave) {
       const E = r.extra;
       if (r.def.tipo === 'agente') {
-        r.bracos[1].rotation.z = 0.12 + a * 0.08 + k * (2.3 + Math.sin(t * 9) * 0.35 * mov);
+        r.bracos[1].rotation.z = 0.12 + k * (2.3 + Math.sin(t * 9) * 0.35 * mov);
         E.balao.scale.setScalar(Math.max(0.001, k));
         E.pontos.forEach((p, j) => { p.position.y = Math.max(0, Math.sin(t * 6 - j * 0.8)) * 0.05 * mov; });
+        E.halo.rotation.z += dt * (0.6 + k * 4) * mov;
+        E.jato.material.opacity = 0.12 + 0.06 * Math.sin(t * 9) * mov + a * 0.12;
       }
       if (r.def.tipo === 'automacao') {
         const vel = (0.4 + a * 2 + k * 4) * mov; E.e1.rotation.z += dt * vel; E.e2.rotation.z -= dt * vel * 1.5;
         r.bracos[0].rotation.x += -k * (0.9 + Math.sin(t * 7) * 0.4 * mov);
+        const abre = 0.25 + Math.sin(t * 8) * 0.25 * k * mov;
+        E.garra[0].rotation.z = abre; E.garra[1].rotation.z = -abre;
       }
       if (r.def.tipo === 'cobranca') {
         r.bracos[1].rotation.x += -k * 1.3;
         E.moeda.rotation.y += dt * (1 + k * 7) * mov;
-        E.moeda.position.y = -0.95 + Math.abs(Math.sin(t * 4)) * k * 0.14 * mov;
+        E.moeda.position.y = -0.92 + Math.abs(Math.sin(t * 4)) * k * 0.14 * mov;
+        E.orbita.rotation.y += dt * (0.7 + k * 3) * mov;
+        E.fenda.material.emissiveIntensity = 1.6 + k * 2.2 * (0.5 + 0.5 * Math.sin(t * 6));
       }
       if (r.def.tipo === 'painel') {
-        E.barras.forEach((b, j) => { b.scale.y = Math.max(0.15, b.userData.h * (0.35 + 0.65 * k * (0.75 + 0.25 * Math.sin(t * 3 + j) * mov))); b.position.y = -0.2 + 0.15 * b.scale.y; });
-        r.bracos[0].rotation.x += -k * 0.5; r.bracos[0].rotation.z += -k * 0.6;
+        E.rotores.forEach((h, j) => { h.rotation.y += dt * (22 + j) * mov; });
+        E.holos.rotation.y = Math.sin(t * 0.6) * 0.25 * mov;
+        E.holos.scale.setScalar(0.75 + 0.3 * k);
+        E.holoMat.opacity = 0.08 + 0.16 * k;
+        E.barras.forEach((b, j) => { b.scale.y = Math.max(0.15, b.userData.h * (0.35 + 0.65 * k * (0.75 + 0.25 * Math.sin(t * 3 + j) * mov))); b.position.y = b.userData.base + 0.15 * b.scale.y; });
+        r.bracos[0].rotation.x += -k * 0.8; r.bracos[1].rotation.x += -k * 0.5 * (1 + Math.sin(t * 5) * 0.3 * mov);
       }
       if (r.def.tipo === 'software') {
         E.blocos.forEach((c, j) => { c.position.lerp(k > 0.5 ? c.userData.pilha : c.userData.solto, suave(4 - j)); c.rotation.y += ((k > 0.5 ? 0 : j * 0.6) - c.rotation.y) * suave(5); });
-        r.bracos[1].rotation.x += -k * 0.8 * (0.7 + 0.3 * Math.sin(t * 5) * mov);
+        r.bracos[0].rotation.x += -k * 0.5 * (0.6 + 0.4 * Math.sin(t * 6) * mov);
+        r.bracos[1].rotation.x += -k * 0.5 * (0.6 + 0.4 * Math.sin(t * 6 + 1.5) * mov);
       }
-      if (r.def.tipo === 'site') { E.cursor.position.x = 0.3 - k * 0.3; E.cursor.position.y = 2.05 - k * 0.26; E.botao.material.emissiveIntensity = 1.2 + k * (1.5 + Math.sin(t * 6) * 0.8 * mov) + r.ativa * 3; }
+      if (r.def.tipo === 'site') {
+        E.cursor.position.x = 0.3 - k * 0.3; E.cursor.position.y = 2.37 - k * 0.27;
+        E.botao.material.emissiveIntensity = 1.2 + k * (1.5 + Math.sin(t * 6) * 0.8 * mov) + r.ativa * 3;
+        r.bracos[1].rotation.z = 0.12 + k * (0.9 + Math.sin(t * 4) * 0.2 * mov);
+      }
+    }
+
+    // o jeito de cada um se mexer: passos, patas, esteira, bola ou flutuar
+    function andarDoTipo(r, a, t, mov, extraY) {
+      const s = Math.sin(r.passo), L = r.locomocao;
+      r.boneco.rotation.set(0, 0, 0);
+      if (L === 'pernas') {
+        r.pernas[0].rotation.x = s * 0.6 * a; r.pernas[1].rotation.x = -s * 0.6 * a;
+        r.boneco.position.y = Math.abs(Math.cos(r.passo)) * 0.08 * a + Math.sin(t * 1.6 + r.fase) * 0.03 * mov * (1 - a) + extraY;
+        r.boneco.rotation.z = s * 0.05 * a;
+      } else if (L === 'patas') {
+        r.pernas.forEach((p) => { p.position.y = p.userData.y + Math.max(0, Math.sin(r.passo + p.userData.fase)) * 0.14 * a; });
+        r.boneco.position.y = Math.abs(Math.sin(r.passo * 2)) * 0.03 * a + Math.sin(t * 1.4 + r.fase) * 0.025 * mov * (1 - a) + extraY;
+      } else if (L === 'esteira') {
+        r.rodas.forEach((w) => { w.rotation.x = r.passo * 0.7; });
+        r.boneco.position.y = Math.sin(t * 40) * 0.008 * a + Math.sin(t * 1.2 + r.fase) * 0.015 * mov * (1 - a) + extraY;
+        r.boneco.rotation.x = 0.05 * a;
+      } else if (L === 'roda') {
+        r.rodas.forEach((w) => { w.rotation.x = r.passo * 0.9; });
+        r.boneco.position.y = Math.sin(t * 1.6 + r.fase) * 0.02 * mov + extraY;
+        r.boneco.rotation.x = 0.16 * a + Math.sin(t * 2.2 + r.fase) * 0.025 * mov * (1 - a);
+      } else {
+        r.boneco.position.y = Math.sin(t * 1.8 + r.fase) * 0.09 * mov + extraY;
+        r.boneco.rotation.x = 0.2 * a;
+      }
     }
 
     function laco() {
@@ -343,9 +506,7 @@ if (secao) {
         const pulo = escolhidoAgora && chegou && desdeChegada < 0.45 ? Math.sin(desdeChegada / 0.45 * Math.PI) * 0.28 * mov : 0;
 
         const s = Math.sin(r.passo), a = r.andar;
-        r.pernas[0].rotation.x = s * 0.75 * a; r.pernas[1].rotation.x = -s * 0.75 * a;
-        r.boneco.position.y = Math.abs(Math.cos(r.passo)) * 0.08 * a + Math.sin(t * 1.6 + r.fase) * 0.03 * mov * (1 - a) + pulo;
-        r.boneco.rotation.z = Math.sin(r.passo) * 0.05 * a;
+        andarDoTipo(r, a, t, mov, pulo);
 
         // gesto do serviço: só depois de chegar e "ligar"
         const querGesto = escolhidoAgora && chegou && desdeChegada > 0.5 ? 1 : 0;
@@ -354,7 +515,7 @@ if (secao) {
         const k = r.k;
 
         // braços balançam ao andar; o gesto toma conta quando ele chega
-        const balanco = -s * 0.6 * a;
+        const balanco = -s * (r.locomocao === 'pernas' ? 0.6 : 0.2) * a;
         r.bracos[0].rotation.x = balanco; r.bracos[1].rotation.x = -balanco;
         r.bracos[0].rotation.z = -0.12 - a * 0.08; r.bracos[1].rotation.z = 0.12 + a * 0.08;
 
@@ -489,7 +650,7 @@ if (secao) {
         trilha.dataset.ligado = String(atual >= 0);
         const b = bots[atual];
         if (b) {
-          b.boneco.position.y = Math.sin(t * 1.6) * 0.04 * mov;
+          andarDoTipo(b, 0, t, mov, 0);
           b.cabeca.rotation.y = (0.2 + Math.sin(t * 0.8) * 0.15) * mov;
           b.piscar -= dt;
           if (b.piscar < 0) b.piscar = 2.5 + Math.random() * 4;
