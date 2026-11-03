@@ -38,13 +38,26 @@
   </header>
 
   <main id="conteudo">
-    <section class="pag-abre" id="topo" data-tema="escuro">
-      <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Para o seu negócio</li><li aria-current="page">Imobiliárias e corretores</li></ol></nav>
-      <h1>Todo interessado respondido na hora, <b>e o corretor com quem quer fechar.</b></h1>
-      <p>Para imobiliárias e corretores: o agente responde, entende o que a pessoa procura e deixa a visita encaminhada. Valor e proposta continuam com o corretor.</p>
-      <div class="abre__botoes">
-        <a class="botao" href="#contato" data-interesse="Agente de IA">Quero meu diagnóstico gratuito</a>
-        <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+    <section class="pag-abre pag-abre--demo" id="topo" data-tema="escuro">
+      <div class="pag-abre__texto">
+        <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Para o seu negócio</li><li aria-current="page">Imobiliárias e corretores</li></ol></nav>
+        <h1>Todo interessado respondido na hora, <b>e o corretor com quem quer fechar.</b></h1>
+        <p>Para imobiliárias e corretores: o agente responde, entende o que a pessoa procura e deixa a visita encaminhada. Valor e proposta continuam com o corretor.</p>
+        <div class="abre__botoes">
+          <a class="botao" href="#contato" data-interesse="Agente de IA">Quero meu diagnóstico gratuito</a>
+          <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+        </div>
+      </div>
+      <div class="demo" data-demo aria-hidden="true">
+        <p class="demo__topo">WhatsApp da empresa<span>23:14</span></p>
+        <div class="demo__corpo">
+          <p class="bolha" data-em="300">Boa noite! Vocês atendem sábado?</p>
+          <p class="bolha bolha--agente" data-em="1100" data-troca="1900"><span class="demo__antes">digitando…</span><span class="demo__depois">Atendemos sim, das 8h às 13h. Quer que eu reserve um horário?</span></p>
+          <p class="bolha" data-em="3300">Quero, às 10h</p>
+          <p class="bolha bolha--agente" data-em="4100" data-troca="4800"><span class="demo__antes">digitando…</span><span class="demo__depois">Pronto, sábado às 10h. Te mando um lembrete na sexta. 👍</span></p>
+          <p class="demo__selo" data-em="5800">Horário salvo na agenda, sem ninguém acordado</p>
+        </div>
+        <small class="demo__nota">Conversa de exemplo</small>
       </div>
     </section>
 
@@ -150,5 +163,6 @@
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
   <script src="../../assets/js/comum.js" defer></script>
+  <script src="../../assets/js/demos.js" defer></script>
 </body>
 </html>

@@ -38,13 +38,28 @@
   </header>
 
   <main id="conteudo">
-    <section class="pag-abre" id="topo" data-tema="escuro">
-      <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Para o seu negócio</li><li aria-current="page">Escolas e cursos</li></ol></nav>
-      <h1>Quem pediu informação recebe resposta, <b>e a secretaria respira.</b></h1>
-      <p>Para escolas, cursos e mentorias: o agente responde o que é repetido, dá retorno a quem demonstrou interesse e lembra a mensalidade no dia certo.</p>
-      <div class="abre__botoes">
-        <a class="botao" href="#contato" data-interesse="Agente de IA">Quero meu diagnóstico gratuito</a>
-        <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+    <section class="pag-abre pag-abre--demo" id="topo" data-tema="escuro">
+      <div class="pag-abre__texto">
+        <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Para o seu negócio</li><li aria-current="page">Escolas e cursos</li></ol></nav>
+        <h1>Quem pediu informação recebe resposta, <b>e a secretaria respira.</b></h1>
+        <p>Para escolas, cursos e mentorias: o agente responde o que é repetido, dá retorno a quem demonstrou interesse e lembra a mensalidade no dia certo.</p>
+        <div class="abre__botoes">
+          <a class="botao" href="#contato" data-interesse="Agente de IA">Quero meu diagnóstico gratuito</a>
+          <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+        </div>
+      </div>
+      <div class="demo" data-demo aria-hidden="true">
+        <p class="demo__topo">Cobrança automática<span>Novembro</span></p>
+        <div class="demo__corpo">
+          <ul class="demo__cobrancas">
+            <li data-em="300" data-troca="1700"><span>Carla M.</span><b>R$ 180</b><i><span class="demo__antes">lembrete enviado</span><span class="demo__depois">Pix recebido</span></i></li>
+            <li data-em="600" data-troca="2500"><span>João P.</span><b>R$ 320</b><i><span class="demo__antes">lembrete enviado</span><span class="demo__depois">Pix recebido</span></i></li>
+            <li data-em="900"><span>Renata S.</span><b>R$ 95</b><i>vence amanhã</i></li>
+            <li class="demo__atraso" data-em="1200" data-troca="3300"><span>Marcos T.</span><b>R$ 450</b><i><span class="demo__antes">7 dias em atraso</span><span class="demo__depois">passou para você</span></i></li>
+          </ul>
+          <p class="demo__total" data-em="3900">Recebido em dia este mês<b data-conta="12480" data-moeda>R$ 12.480</b></p>
+        </div>
+        <small class="demo__nota">Nomes e valores de exemplo</small>
       </div>
     </section>
 
@@ -150,5 +165,6 @@
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
   <script src="../../assets/js/comum.js" defer></script>
+  <script src="../../assets/js/demos.js" defer></script>
 </body>
 </html>

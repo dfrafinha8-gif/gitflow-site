@@ -38,13 +38,28 @@
   </header>
 
   <main id="conteudo">
-    <section class="pag-abre" id="topo" data-tema="escuro">
-      <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Para o seu negócio</li><li aria-current="page">Oficinas e assistências</li></ol></nav>
-      <h1>O cliente sabe como está o serviço, <b>sem precisar ligar cinco vezes.</b></h1>
-      <p>Para oficinas, assistências técnicas e serviços locais: aviso de cada etapa, orçamento aprovado pelo WhatsApp e cliente lembrado de voltar.</p>
-      <div class="abre__botoes">
-        <a class="botao" href="#contato" data-interesse="Automação">Quero meu diagnóstico gratuito</a>
-        <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+    <section class="pag-abre pag-abre--demo" id="topo" data-tema="escuro">
+      <div class="pag-abre__texto">
+        <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Para o seu negócio</li><li aria-current="page">Oficinas e assistências</li></ol></nav>
+        <h1>O cliente sabe como está o serviço, <b>sem precisar ligar cinco vezes.</b></h1>
+        <p>Para oficinas, assistências técnicas e serviços locais: aviso de cada etapa, orçamento aprovado pelo WhatsApp e cliente lembrado de voltar.</p>
+        <div class="abre__botoes">
+          <a class="botao" href="#contato" data-interesse="Automação">Quero meu diagnóstico gratuito</a>
+          <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+        </div>
+      </div>
+      <div class="demo" data-demo aria-hidden="true">
+        <p class="demo__topo">Pedido novo<span>agora</span></p>
+        <div class="demo__corpo">
+          <ol class="demo__fluxo">
+            <li data-em="400"><b>Pedido chegou pelo WhatsApp</b><span>Maria, 2 itens</span></li>
+            <li data-em="1400"><b>Lançado no sistema</b><span>sem ninguém digitar</span></li>
+            <li data-em="2400"><b>Estoque atualizado</b><span>2 unidades baixadas</span></li>
+            <li data-em="3400"><b>Equipe avisada</b><span>separar até as 14h</span></li>
+          </ol>
+          <p class="demo__total" data-em="4300">Tarefas feitas sozinhas hoje<b data-conta="37">37</b></p>
+        </div>
+        <small class="demo__nota">Exemplo</small>
       </div>
     </section>
 
@@ -150,5 +165,6 @@
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
   <script src="../../assets/js/comum.js" defer></script>
+  <script src="../../assets/js/demos.js" defer></script>
 </body>
 </html>

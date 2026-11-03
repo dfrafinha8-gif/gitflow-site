@@ -38,13 +38,28 @@
   </header>
 
   <main id="conteudo">
-    <section class="pag-abre" id="topo" data-tema="escuro">
-      <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Serviços</li><li aria-current="page">Software sob medida</li></ol></nav>
-      <h1>Um sistema feito do jeito <b>que a sua empresa trabalha.</b></h1>
-      <p>Quando nenhum sistema pronto serve, a gente escreve o seu: pedidos, estoque, agenda e financeiro, do jeito que você trabalha.</p>
-      <div class="abre__botoes">
-        <a class="botao" href="#contato" data-interesse="Software sob medida">Quero meu diagnóstico gratuito</a>
-        <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+    <section class="pag-abre pag-abre--demo" id="topo" data-tema="escuro">
+      <div class="pag-abre__texto">
+        <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Serviços</li><li aria-current="page">Software sob medida</li></ol></nav>
+        <h1>Um sistema feito do jeito <b>que a sua empresa trabalha.</b></h1>
+        <p>Quando nenhum sistema pronto serve, a gente escreve o seu: pedidos, estoque, agenda e financeiro, do jeito que você trabalha.</p>
+        <div class="abre__botoes">
+          <a class="botao" href="#contato" data-interesse="Software sob medida">Quero meu diagnóstico gratuito</a>
+          <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+        </div>
+      </div>
+      <div class="demo" data-demo aria-hidden="true">
+        <p class="demo__topo">Pedidos<span>do jeito que você trabalha</span></p>
+        <div class="demo__corpo">
+          <div class="demo__quadro">
+            <div class="demo__coluna"><small>Novos</small><p class="demo__ficha">Bolo 2 kg<span>sex, 10h</span></p></div>
+            <div class="demo__coluna"><small>Produzindo</small><p class="demo__ficha">Salgados<span>sáb, 9h</span></p></div>
+            <div class="demo__coluna"><small>Prontos</small><p class="demo__ficha">Torta<span>hoje, 16h</span></p></div>
+            <p class="demo__ficha demo__mover" data-troca="1400,3000">Kit festa<span>dom, 12h</span></p>
+          </div>
+          <p class="demo__selo" data-em="3900">Cliente avisado: o pedido está pronto</p>
+        </div>
+        <small class="demo__nota">Exemplo</small>
       </div>
     </section>
 
@@ -152,5 +167,6 @@
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
   <script src="../../assets/js/comum.js" defer></script>
+  <script src="../../assets/js/demos.js" defer></script>
 </body>
 </html>

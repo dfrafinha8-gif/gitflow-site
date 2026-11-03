@@ -38,13 +38,33 @@
   </header>
 
   <main id="conteudo">
-    <section class="pag-abre" id="topo" data-tema="escuro">
-      <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Serviços</li><li aria-current="page">Sites sob medida</li></ol></nav>
-      <h1>Um site que transforma visita <b>em pedido de orçamento.</b></h1>
-      <p>Site da empresa, página de vendas ou loja online, feitos do zero, sem cara de modelo pronto.</p>
-      <div class="abre__botoes">
-        <a class="botao" href="#contato" data-interesse="Site sob medida">Quero meu diagnóstico gratuito</a>
-        <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+    <section class="pag-abre pag-abre--demo" id="topo" data-tema="escuro">
+      <div class="pag-abre__texto">
+        <nav class="migalhas" aria-label="Você está em"><ol><li><a href="../../">Início</a></li><li>Serviços</li><li aria-current="page">Sites sob medida</li></ol></nav>
+        <h1>Um site que transforma visita <b>em pedido de orçamento.</b></h1>
+        <p>Site da empresa, página de vendas ou loja online, feitos do zero, sem cara de modelo pronto.</p>
+        <div class="abre__botoes">
+          <a class="botao" href="#contato" data-interesse="Site sob medida">Quero meu diagnóstico gratuito</a>
+          <a class="botao botao--linha" href="../../#ao-vivo">Testar o agente agora</a>
+        </div>
+      </div>
+      <div class="demo" data-demo aria-hidden="true">
+        <p class="demo__topo">Visita pelo celular<span>12:20</span></p>
+        <div class="demo__corpo">
+          <div class="demo__navegador">
+            <p class="demo__barra"><i></i><i></i><i></i><span>suaempresa.com.br</span></p>
+            <div class="demo__pagina">
+              <strong>Sua empresa</strong>
+              <span class="demo__linha" style="width:88%"></span>
+              <span class="demo__linha" style="width:64%"></span>
+              <span class="demo__fotos"><i></i><i></i><i></i></span>
+              <span class="demo__botao" data-troca="2300">Pedir orçamento</span>
+              <i class="demo__cursor" data-troca="900,2200"></i>
+            </div>
+          </div>
+          <div class="demo__notif" data-em="3000"><small>WhatsApp<span>agora</span></small><strong>Novo pedido de orçamento pelo site</strong></div>
+        </div>
+        <small class="demo__nota">Exemplo</small>
       </div>
     </section>
 
@@ -152,5 +172,6 @@
   <a class="fixo" href="#contato" data-fixo>Diagnóstico gratuito</a>
 
   <script src="../../assets/js/comum.js" defer></script>
+  <script src="../../assets/js/demos.js" defer></script>
 </body>
 </html>
