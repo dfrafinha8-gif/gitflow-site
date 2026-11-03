@@ -206,6 +206,66 @@ html:not(.js) .cartao { margin-top: 20px; }
 .botao--tinta::before { background: conic-gradient(from var(--giro), transparent 0 62%, #fff 76%, var(--tinta) 88%, transparent 96%); }
 @keyframes giro { to { --giro: 360deg; } }
 
+/* Título que se acende com uma faixa de luz (assets/js/futuro.js) */
+.titulo-luz { background-image: linear-gradient(100deg, var(--cor-titulo) 0, var(--cor-titulo) calc(var(--luz, -10%) - 7%), #FFF4D6 calc(var(--luz, -10%) - 2.5%), var(--ouro) var(--luz, -10%), transparent calc(var(--luz, -10%) + 3%)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Varredura: uma linha de luz passa pela seção na primeira vez que ela aparece */
+.varre { position: relative; }
+.varre::after { content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: linear-gradient(180deg, transparent 0, rgba(212, 188, 128, 0) 38%, rgba(212, 188, 128, .14) 49.2%, rgba(255, 244, 214, .85) 50%, transparent 50.35%); background-size: 100% 300%; background-position: 0 100%; }
+.varre.varrendo::after { animation: varre-secao 1.3s cubic-bezier(.45, 0, .2, 1) forwards; }
+@keyframes varre-secao { 0% { opacity: 1; background-position: 0 100%; } 85% { opacity: 1; } 100% { opacity: 0; background-position: 0 0; } }
+
+/* Rede neural no fundo das seções escuras */
+[data-rede] { position: relative; overflow: hidden; }
+[data-rede] > :not(.rede) { position: relative; z-index: 1; }
+.rede { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+/* Monte sua equipe (assets/js/monte.js) */
+.monte { background: var(--fundo); padding: clamp(70px, 9vw, 130px) var(--borda); }
+.monte__topo { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(20px, 4vw, 70px); align-items: end; margin-bottom: clamp(26px, 4vw, 50px); }
+.monte__topo p { font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--prata); }
+.monte__grade { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr); gap: clamp(18px, 3vw, 40px); align-items: start; }
+.monte__vitrine { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.monte__robo { all: unset; position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 12px 14px; border: 1px solid var(--fio); background: rgba(12, 16, 22, .85); cursor: grab; text-align: center; transition: border-color .2s, transform .3s var(--mola), background .2s; }
+.monte__robo:hover { border-color: rgba(212, 188, 128, .6); transform: translateY(-3px); }
+.monte__robo:focus-visible { outline: 2px solid var(--ouro); outline-offset: 3px; }
+.monte__robo img { width: 100%; height: clamp(110px, 12vw, 170px); object-fit: contain; transition: transform .4s var(--mola); }
+.monte__robo:hover img { transform: translateY(-4px) rotate(-2deg); }
+.monte__robo b { font-family: var(--titulo); font-stretch: 125%; font-weight: 500; font-size: 1.05rem; margin-top: 6px; }
+.monte__robo small { font-size: .8rem; color: var(--apagado); }
+.monte__mais { margin-top: 8px; padding: 5px 12px; border: 1px solid var(--fio); font: 400 .72rem 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--prata); }
+.monte__robo[aria-pressed=true] { border-color: var(--ouro); background: rgba(212, 188, 128, .08); }
+.monte__robo[aria-pressed=true] .monte__mais { background: var(--ouro); border-color: var(--ouro); color: var(--tinta); }
+.monte__empresa { position: sticky; top: 84px; padding: 20px; border: 1px solid rgba(212, 188, 128, .45); clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px)); background: linear-gradient(rgba(12, 16, 22, .95), rgba(12, 16, 22, .95)), repeating-linear-gradient(0deg, rgba(212, 188, 128, .05) 0 1px, transparent 1px 3px); transition: background .2s; }
+.monte__empresa[data-recebendo=true] { background: rgba(212, 188, 128, .12); }
+.monte__titulo { display: flex; justify-content: space-between; font: 400 .78rem 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ouro); }
+.monte__titulo b { font-weight: 400; color: var(--prata); }
+.monte__fila { display: flex; flex-wrap: wrap; gap: 8px; min-height: 104px; margin: 14px 0; padding: 10px; border: 1px dashed var(--fio); }
+.monte__vazio { margin: auto; font-size: .88rem; color: var(--apagado); text-align: center; }
+.monte__membro { all: unset; cursor: pointer; display: flex; flex-direction: column; align-items: center; width: 70px; font-size: .72rem; color: var(--prata); }
+.monte__membro img { width: 62px; height: 74px; object-fit: contain; }
+.monte__membro:hover span { text-decoration: line-through; color: var(--bronze); }
+.monte__membro:focus-visible { outline: 2px solid var(--ouro); outline-offset: 2px; }
+.monte__membro--novo { animation: entra-membro .5s var(--mola); }
+@keyframes entra-membro { from { opacity: 0; transform: translateY(-14px) scale(.7); } }
+.monte__faz { list-style: none; padding: 0; margin-bottom: 16px; }
+.monte__faz li { padding: 7px 0 7px 18px; border-top: 1px solid var(--fio); font-size: .9rem; color: var(--prata); position: relative; }
+.monte__faz li::before { content: ""; position: absolute; left: 0; top: 14px; width: 7px; height: 7px; border-radius: 50%; background: var(--prata); }
+.monte__faz li b { font-weight: 500; color: var(--papel); }
+.monte__faz .monte__junto { color: var(--papel); }
+.monte__faz .monte__junto::before { background: var(--ouro); box-shadow: 0 0 8px var(--ouro); }
+.monte__empresa .botao:disabled { opacity: .45; cursor: not-allowed; }
+.monte__empresa small { display: block; margin-top: 10px; font-size: .8rem; color: var(--apagado); }
+
+/* Robô que acompanha a rolagem em "O que fazemos" (assets/js/equipe.js, só em tela larga) */
+.oferta--acompanha { position: relative; }
+.oferta--acompanha .servico { column-gap: 230px; }
+.acompanha { position: absolute; z-index: 2; width: 210px; pointer-events: none; }
+.acompanha__palco { position: sticky; top: calc(50vh - 150px); width: 210px; height: 310px; opacity: 0; transition: opacity .4s; }
+.acompanha[data-ligado=true] .acompanha__palco { opacity: 1; }
+.acompanha__palco canvas { display: block; width: 210px; height: 280px; }
+.acompanha__nome { text-align: center; font: 400 .72rem 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: #6B5A2E; }
+
 /* Calculadora */
 .custo { background: var(--ouro); color: var(--tinta); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 100px); padding: clamp(70px, 9vw, 130px) var(--borda); }
 .custo__texto > p { margin: 18px 0 clamp(24px, 3vw, 40px); font-size: clamp(1.05rem, 1.4vw, 1.3rem); max-width: 38ch; }
@@ -472,7 +532,8 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
   .vivo { grid-template-columns: 1fr; }
   .fone { height: 540px; }
   .mente { min-height: 0; max-height: none; }
-  .custo, .duvidas, .projetos__topo, .oferta__topo, .pag-entrega, .equipe__topo, .antes__topo { grid-template-columns: 1fr; }
+  .custo, .duvidas, .projetos__topo, .oferta__topo, .pag-entrega, .equipe__topo, .antes__topo, .monte__topo, .monte__grade { grid-template-columns: 1fr; }
+  .monte__empresa { position: static; }
   .antes__lado ul { grid-template-columns: 1fr 1fr; }
   .pag-muda__lista { grid-template-columns: 1fr; }
   .pag-abre.pag-abre--demo { grid-template-columns: 1fr; row-gap: 44px; }
@@ -507,6 +568,7 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
   .equipe__palco { flex: none; height: min(118vw, 520px); }
   .equipe { min-height: 0; }
   .antes__lado ul { grid-template-columns: 1fr; }
+  .monte__vitrine { grid-template-columns: 1fr 1fr; }
   .equipe__hud p { font-size: .6rem; }
   .equipe__ficha { position: static; display: none; width: auto; margin-top: 18px; box-shadow: none; }
   .equipe__ficha[data-aberta=true] { display: block; }

@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@400;500&family=Saira:wdth,wght@125,500;125,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=23e61c0a9c">
+  <link rel="stylesheet" href="assets/css/site.css?v=5ff434fec4">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -172,7 +172,7 @@
       </div>
     </section>
 
-    <section class="antes" id="antes-e-depois" data-tema="escuro" data-antes>
+    <section class="antes" id="antes-e-depois" data-tema="escuro" data-antes data-rede>
       <div class="antes__topo">
         <h2>Arraste e compare.</h2>
         <p>De um lado, o dia de hoje. Do outro, o mesmo dia com a GitFlow trabalhando junto.</p>
@@ -438,7 +438,7 @@
       </div>
     </section>
 
-    <section class="projetos" id="projetos" data-tema="escuro">
+    <section class="projetos" id="projetos" data-tema="escuro" data-rede>
       <div class="projetos__topo">
         <h2>O que já construímos para empresas da região.</h2>
         <p>Alguns projetos nossos para pequenas empresas da região, sem os nomes por respeito a cada uma. Parte deles ainda está em fase de demonstração, e a gente avisa em cada um.</p>
@@ -494,7 +494,7 @@
       </div>
     </section>
 
-    <section class="duvidas" id="duvidas" data-tema="escuro">
+    <section class="duvidas" id="duvidas" data-tema="escuro" data-rede>
       <h2>O que todo dono pergunta antes de fechar</h2>
       <div>
         <details><summary>Meu cliente vai perceber que é um robô e não vai gostar?</summary><p>O agente se apresenta como assistente e não tenta se passar por pessoa. O que irrita é robô de menu que não entende e não deixa falar com ninguém. O nosso entende o que foi escrito e chama a sua equipe quando o assunto pede.</p></details>
@@ -506,6 +506,30 @@
         <details><summary>Preciso trocar os sistemas que já uso?</summary><p>Quase nunca. Conectamos o que você já tem. Só sugerimos trocar quando a ferramenta atual realmente impede a automação.</p></details>
         <details><summary>E se parar de funcionar?</summary><p>As automações são monitoradas. Quando algo sai do normal, o alerta chega para nós e a gente corrige. E você fala direto com quem construiu.</p></details>
         <details><summary>Meus dados ficam seguros?</summary><p>Usamos as permissões mínimas necessárias, seguimos a LGPD e documentamos por onde cada dado passa.</p></details>
+      </div>
+    </section>
+
+    <section class="monte" id="monte-sua-equipe" data-tema="escuro" data-monte data-rede>
+      <div class="monte__topo">
+        <h2>Monte a sua equipe.</h2>
+        <p>Escolha os robôs que a sua empresa precisa. A gente mostra o que eles fazem juntos, e você manda o pedido pronto pelo WhatsApp.</p>
+      </div>
+      <div class="monte__grade">
+        <div class="monte__vitrine" role="group" aria-label="Robôs disponíveis">
+          <button type="button" class="monte__robo" draggable="true" data-robo="atendente" aria-pressed="false"><img src="assets/img/robos/atendente.webp" width="336" height="480" alt="" loading="lazy" decoding="async"><b>Atendente</b><small>Agente de IA</small><span class="monte__mais">Contratar</span></button>
+          <button type="button" class="monte__robo" draggable="true" data-robo="operario" aria-pressed="false"><img src="assets/img/robos/operario.webp" width="336" height="480" alt="" loading="lazy" decoding="async"><b>Operário</b><small>Automações</small><span class="monte__mais">Contratar</span></button>
+          <button type="button" class="monte__robo" draggable="true" data-robo="cobrador" aria-pressed="false"><img src="assets/img/robos/cobrador.webp" width="336" height="480" alt="" loading="lazy" decoding="async"><b>Cobrador</b><small>Cobrança automática</small><span class="monte__mais">Contratar</span></button>
+          <button type="button" class="monte__robo" draggable="true" data-robo="analista" aria-pressed="false"><img src="assets/img/robos/analista.webp" width="336" height="480" alt="" loading="lazy" decoding="async"><b>Analista</b><small>Painéis de gestão</small><span class="monte__mais">Contratar</span></button>
+          <button type="button" class="monte__robo" draggable="true" data-robo="construtor" aria-pressed="false"><img src="assets/img/robos/construtor.webp" width="336" height="480" alt="" loading="lazy" decoding="async"><b>Construtor</b><small>Software sob medida</small><span class="monte__mais">Contratar</span></button>
+          <button type="button" class="monte__robo" draggable="true" data-robo="vitrine" aria-pressed="false"><img src="assets/img/robos/vitrine.webp" width="336" height="480" alt="" loading="lazy" decoding="async"><b>Vitrine</b><small>Sites sob medida</small><span class="monte__mais">Contratar</span></button>
+        </div>
+        <div class="monte__empresa" data-monte-empresa>
+          <p class="monte__titulo"><span>Sua empresa</span><b data-monte-contagem>0 robôs</b></p>
+          <div class="monte__fila" data-monte-fila aria-live="polite"></div>
+          <ul class="monte__faz" data-monte-faz aria-live="polite"></ul>
+          <button class="botao" type="button" data-monte-pedir disabled>Pedir essa equipe pelo WhatsApp</button>
+          <small>Abre o WhatsApp com a lista pronta. Nada é enviado sem você apertar enviar. O valor sai no diagnóstico, depois de entender a sua empresa.</small>
+        </div>
       </div>
     </section>
 
@@ -563,7 +587,8 @@
   <script src="assets/js/ao-vivo.js?v=f2100248e8" defer></script>
   <script src="assets/js/materia.js?v=8a1abeb7b6" defer></script>
   <script src="assets/js/demos.js?v=25cef8f12f" defer></script>
-  <script src="assets/js/equipe.js?v=e35f49f1f3" type="module"></script>
-  <script src="assets/js/futuro.js?v=eed7cadec0" defer></script>
+  <script src="assets/js/equipe.js?v=57f5278483" type="module"></script>
+  <script src="assets/js/futuro.js?v=5034dfb5b2" defer></script>
+  <script src="assets/js/monte.js?v=d20aa664c7" defer></script>
 </body>
 </html>
