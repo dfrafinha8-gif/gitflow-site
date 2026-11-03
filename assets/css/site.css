@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --fundo: #07090D;
   --grafite: #0C1016;
   --ouro: #D4BC80;
@@ -18,6 +19,12 @@ html { background: var(--fundo); scroll-behavior: smooth; }
 body { color: var(--papel); font-family: 'IBM Plex Sans', sans-serif; line-height: 1.45; overflow-x: hidden; }
 h1, h2, h3 { font-family: var(--titulo); font-stretch: 125%; font-weight: 700; letter-spacing: -.025em; line-height: 1.02; }
 h2 { font-size: clamp(2rem, 5vw, 5.4rem); }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+[id] { scroll-margin-top: 72px; }
+a, button, summary, input, select, textarea { touch-action: manipulation; }
+/* Seções claras pedem controles claros */
+.oferta, .custo, .como, .contato, .pag-dor, .pag-muda, .pag-outros, .priv { color-scheme: light; }
 a { color: inherit; }
 img { max-width: 100%; height: auto; display: block; }
 img[hidden] { display: none; }
@@ -64,9 +71,9 @@ img[hidden] { display: none; }
 .abre small { display: block; margin-top: 14px; color: var(--prata); font-size: .88rem; }
 
 .aviso { position: absolute; right: var(--borda); bottom: clamp(60px, 9vh, 90px); width: 300px; padding: 14px 16px; background: rgba(20, 25, 32, .9); border: 1px solid var(--fio); border-radius: 14px; box-shadow: 0 18px 50px rgba(0, 0, 0, .5); }
-.aviso small { display: block; font-size: .75rem; color: var(--apagado); margin-bottom: 4px; }
+.aviso small { display: flex; justify-content: space-between; font-size: .75rem; color: var(--apagado); margin-bottom: 4px; }
 .aviso strong { display: block; font-weight: 500; }
-.aviso span { display: block; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--fio); font-size: .84rem; color: var(--bronze); }
+.aviso > span { display: block; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--fio); font-size: .84rem; color: var(--bronze); }
 .aviso b { font: 400 .84rem 'IBM Plex Mono', monospace; }
 .js .aviso { animation: chega .7s 1s var(--mola) backwards; }
 @keyframes chega { from { opacity: 0; transform: translateY(-16px) scale(.96); } }
@@ -81,7 +88,8 @@ img[hidden] { display: none; }
 .js .cartao { position: absolute; right: var(--borda); top: 50%; transform: translateY(-50%); }
 
 .cartao { width: min(400px, 100%); background: rgba(16, 20, 27, .93); border: 1px solid var(--fio); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
-.cartao__titulo { color: var(--apagado); font-size: .8rem; margin-bottom: 4px; }
+.cartao__titulo { display: flex; justify-content: space-between; gap: 12px; color: var(--prata); font-size: .8rem; font-weight: 500; margin-bottom: 4px; }
+.cartao__titulo span { color: var(--apagado); font-weight: 400; text-align: right; }
 .cartao__nota { color: var(--apagado); font-size: .72rem; margin-top: 4px; }
 .cartao__passo { font: 400 .78rem 'IBM Plex Mono', monospace; color: var(--bronze); padding: 2px 4px; }
 .cartao__passo--ok { color: var(--ouro); }
@@ -185,9 +193,10 @@ html:not(.js) .cartao { margin-top: 20px; }
 .projetos__topo { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(20px, 4vw, 70px); align-items: end; margin-bottom: clamp(30px, 5vw, 70px); }
 .projetos__topo p { font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--prata); }
 .obras { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(26px, 3vw, 44px) clamp(16px, 2vw, 28px); }
-.obra { border-top: 2px solid var(--ouro); padding-top: 14px; }
-.obra small { display: block; font: 400 .74rem 'IBM Plex Mono', monospace; color: var(--bronze); }
-.obra h3 { font-size: clamp(1.6rem, 3.4vw, 3.4rem); margin-top: clamp(26px, 5vw, 70px); }
+.obra { display: flex; flex-direction: column; border-top: 2px solid var(--ouro); padding-top: clamp(18px, 2.4vw, 30px); }
+.obra small { order: 2; margin-top: 8px; font-size: .9rem; color: var(--bronze); }
+.obra h3 { font-size: clamp(1.6rem, 3.4vw, 3.4rem); }
+.obra p { order: 3; }
 .obra p { margin-top: 6px; color: var(--prata); max-width: 62ch; }
 .projetos__nos { margin-top: clamp(40px, 6vw, 80px); padding-top: 24px; border-top: 1px solid var(--fio); font-size: clamp(1.1rem, 1.9vw, 1.8rem); line-height: 1.3; max-width: 44ch; }
 .projetos__nos b { color: var(--ouro); font-weight: 500; }
@@ -218,10 +227,12 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
 .contato__socios { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-weight: 500; }
 .form { display: flex; flex-direction: column; gap: 16px; }
 .form label { display: flex; flex-direction: column; gap: 6px; font-weight: 500; font-size: .95rem; }
-.form input, .form textarea, .form select { font: inherit; font-weight: 400; color: var(--tinta); background: transparent; border: 0; border-bottom: 2px solid var(--tinta); padding: 8px 0; border-radius: 0; resize: vertical; }
+.form input, .form textarea, .form select { font: inherit; font-weight: 400; color: var(--tinta); background-color: transparent; border: 0; border-bottom: 2px solid var(--tinta); padding: 8px 0; border-radius: 0; resize: vertical; }
 .form input:focus, .form textarea:focus, .form select:focus { outline: 0; border-bottom-width: 4px; }
 .form [aria-invalid=true] { border-bottom-color: #8E1F12; }
 .form textarea::placeholder { color: #5A4C2B; }
+.form select { background-color: var(--ouro); }
+.form option { background: #fff; color: var(--tinta); }
 .form button { align-self: flex-start; margin-top: 6px; }
 .form small { font-size: .85rem; }
 
@@ -238,9 +249,12 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
 
 /* Páginas de serviço e de nicho */
 .pag-abre { position: relative; overflow: hidden; min-height: 86vh; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(90px, 14vh, 150px) var(--borda) clamp(40px, 8vh, 80px); background: radial-gradient(90vh 90vh at 78% 110%, rgba(201, 139, 78, .28), transparent 70%), var(--fundo); }
-.pag-abre small { font: 400 .82rem 'IBM Plex Mono', monospace; color: var(--bronze); margin-bottom: 18px; }
+.migalhas ol { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin-bottom: 22px; font-size: .9rem; color: var(--prata); }
+.migalhas li + li::before { content: "/"; margin: 0 .6em; color: var(--apagado); }
+.migalhas a { text-underline-offset: 4px; }
+.migalhas [aria-current] { color: var(--papel); }
 .pag-abre h1 { font-size: clamp(2.2rem, 6vw, 6.6rem); max-width: 17ch; }
-.pag-abre h1 b { display: block; font-weight: 700; color: var(--ouro); }
+.pag-abre h1 b { display: block; font-weight: 700; }
 .pag-abre p { margin-top: clamp(14px, 2vw, 24px); max-width: 52ch; font-size: clamp(1.05rem, 1.5vw, 1.4rem); line-height: 1.34; }
 .pag-dor { background: var(--ouro); color: var(--tinta); padding: clamp(60px, 9vw, 130px) var(--borda); }
 .pag-dor h2 { margin-bottom: clamp(22px, 3vw, 44px); }
@@ -269,10 +283,6 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
 .priv h2 { font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.15; letter-spacing: -.01em; margin-top: 28px; padding-top: 16px; border-top: 1px solid #C6CDD6; }
 .priv p:not(.priv__intro) { margin-top: 8px; max-width: 68ch; }
 .priv__data { color: #4F5D6E; font-size: .9rem; padding-top: 18px; }
-
-/* Entrada dos blocos ao rolar */
-.js [data-surge] { opacity: 0; transform: translateY(26px); transition: opacity .7s ease-out, transform .8s var(--mola); }
-.js [data-surge].visto { opacity: 1; transform: none; }
 
 @media (max-width: 1050px) {
   .vivo { grid-template-columns: 1fr; }
@@ -315,5 +325,4 @@ details p { padding: 0 0 20px; max-width: 64ch; color: var(--prata); }
   html { scroll-behavior: auto; }
   .msg, .passo, .aviso { animation: none; }
   .botao { transition: none; }
-  .js [data-surge] { opacity: 1; transform: none; transition: none; }
 }

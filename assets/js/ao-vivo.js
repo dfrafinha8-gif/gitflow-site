@@ -39,7 +39,7 @@
     ] },
     'Barbearia': { nome: 'Barbearia Exemplo', perguntas: [
       { q: 'Consegue me encaixar hoje? Só posso depois do almoço', falas: [
-        ['p', 'entende a pergunta', '"Depois do almoço" quer dizer a partir das 13h.'],
+        ['p', 'entende a pergunta', '“Depois do almoço” quer dizer a partir das 13h.'],
         ['p', 'consulta a agenda', 'Livre hoje: 13h30 e 15h.', 'ok'],
         ['a', 'Consigo! Tenho 13h30 ou 15h. Qual fica melhor?'],
       ] },

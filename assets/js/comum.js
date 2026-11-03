@@ -43,15 +43,6 @@ document.querySelectorAll('a[href="#contato"]').forEach((a) => {
   a.addEventListener('click', () => medir('botao-contato', { origem: a.closest('section, header')?.id || a.dataset.fixo !== undefined && 'fixo' || 'menu', servico: a.dataset.interesse || 'nenhum' }));
 });
 
-// Blocos que entram ao rolar
-const olhoSurge = new IntersectionObserver((vistas) => {
-  vistas.filter((v) => v.isIntersecting).forEach((v) => {
-    v.target.classList.add('visto');
-    olhoSurge.unobserve(v.target);
-  });
-}, { rootMargin: '0px 0px -8% 0px' });
-document.querySelectorAll('[data-surge]').forEach((el) => olhoSurge.observe(el));
-
 // O botão de cada serviço já deixa o interesse marcado no formulário
 const form = document.querySelector('[data-contato]');
 document.querySelectorAll('[data-interesse]').forEach((a) => {
